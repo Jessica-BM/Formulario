@@ -464,7 +464,7 @@
                     id="curp"
                     type="text"
                     class="form-control"
-                    placeholder="Ej. SAS45..."
+                    placeholder="Escriba la CURP"
                     aria-label="CURP"
                     aria-describedby="CURP"
                     required
@@ -629,6 +629,7 @@
                   <input
                     id="curpPadre"
                     type="text"
+                    placeholder="Escriba la CURP"
                     class="form-control"
                     required
                   />
@@ -761,7 +762,7 @@
               <div class="col-md-2 mb-3">
                 <input
                   id="cpPadre"
-                  type="text"
+                  type="tel"
                   class="form-control"
                   placeholder="Código Postal"
                   aria-label="cpPadre"
@@ -923,7 +924,7 @@
                 >
                 <input
                   id="celEmergencia"
-                  type="text"
+                  type="tel"
                   class="form-control"
                   placeholder="Escribe el # celular"
                   aria-label="celEmergencia"
@@ -1015,183 +1016,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Modal información guardada con éxito -->
-        <div
-          class="modal fade"
-          id="saveInfoSuccess"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">
-                  Registro guardado
-                </h5>
-              </div>
-              <div class="modal-body text-center">
-                <div id="iconSuccess" class="mt-2">
-                  <i class="bi bi-check"></i>
-                </div>
-
-                <p class="mt-4">Información guardada con éxito</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal: Detalles de Hermanos -->
-        <div
-          class="modal fade"
-          id="modalHermanos"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                  Información de Hermanos
-                </h1>
-              </div>
-              <div class="modal-body">
-                <!-- Pregunta sobre inscripción -->
-                <div class="mb-3" style="align-items: center">
-                  <span
-                    class="input-group-text"
-                    style="
-                      background-color: #042159;
-                      color: #fff;
-                      font-weight: 500;
-                    "
-                    >¿Tiene más hijos que desee inscribir?</span
-                  >
-
-                  <p class="mt-3 fw-semibold">
-                    <b>NOTA:</b> Si elige la opción
-                    <b>"Continuar registro"</b> los datos del padre de familia y
-                    contacto se replicarán en ese registro.
-                  </p>
-                  <p class="mt-2 fw-semibold">
-                    Si no son los mismos datos entonces seleccione finalizar y
-                    cominece un registro nuevo.
-                  </p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  id="continuarRegistro"
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-dismiss="modal"
-                >
-                  Continuar registro
-                </button>
-                <button
-                  id="finalizarRegistro"
-                  type="button"
-                  class="btn btn-success"
-                  data-bs-dismiss="modal"
-                >
-                  Finalizar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal: Detalles de Pago -->
-        <div
-          class="modal fade"
-          id="modalPago"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                  Información de Pago
-                </h1>
-              </div>
-              <div class="modal-body">
-                <!-- Costo inscripción -->
-                <div class="mb-3" style="align-items: center">
-                  <span
-                    class="input-group-text"
-                    style="
-                      background-color: #042159;
-                      color: #fff;
-                      font-weight: 500;
-                    "
-                    >COSTO DE INSCRIPCIÓN</span
-                  >
-                  <p>$3, 000 por alumno</p>
-                </div>
-
-                <!-- No. de cuenta -->
-                <div class="mb-3" style="align-items: center">
-                  <span
-                    class="input-group-text"
-                    style="
-                      background-color: #042159;
-                      color: #fff;
-                      font-weight: 500;
-                    "
-                    >NO. DE CUENTA</span
-                  >
-                  <p>0101727834</p>
-                </div>
-                <!-- No. de cuenta clabe -->
-                <div class="mb-3" style="align-items: center">
-                  <span
-                    class="input-group-text"
-                    style="
-                      background-color: #042159;
-                      color: #fff;
-                      font-weight: 500;
-                    "
-                    >NO. DE CUENTA CLABE</span
-                  >
-                  <p>012680001017278342</p>
-                </div>
-                <!-- Nombre de la empresa -->
-                <div class="mb-3" style="align-items: center">
-                  <span
-                    class="input-group-text"
-                    style="
-                      background-color: #042159;
-                      color: #fff;
-                      font-weight: 500;
-                    "
-                    >NOMBRE DEL BENEFICIARIO</span
-                  >
-                  <p>INSTITUTO J FRANCISCO RODRIGUEZ SC</p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  id="datosPago"
-                  type="button"
-                  class="btn btn-success"
-                  data-bs-dismiss="modal"
-                >
-                  Entendido
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </form>
     </div>
 
@@ -1233,6 +1057,9 @@
 
     <!-- MOMENT JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+    <!-- SCRIPT PARA ALERT PERSONALIZADO -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
       $(document).ready(function () {
@@ -3878,15 +3705,6 @@
       const registroModal = new bootstrap.Modal(
         document.getElementById("saveInfo")
       );
-      const successModal = new bootstrap.Modal(
-        document.getElementById("saveInfoSuccess")
-      );
-      const modalHermanos = new bootstrap.Modal(
-        document.getElementById("modalHermanos")
-      );
-      const modalPagos = new bootstrap.Modal(
-        document.getElementById("modalPago")
-      );
 
       /*
        document
@@ -4078,14 +3896,76 @@
                 .then(() => {
                   moveToStep(0);
                   registroModal.hide();
-                  setTimeout(() => {
-                    successModal.show();
-                  }, 1000);
-
-                  setTimeout(() => {
-                    successModal.hide();
-                    modalPagos.show();
-                  }, 3000);
+                  Swal.fire({
+                    title: "¡Registro guardado con éxito!",
+                    icon: "success",
+                    confirmButtonText: "Aceptar",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      Swal.fire({
+                        title: "<strong><u>INFORMACIÓN DE PAGO</u></strong>",
+                        html: ` <!-- Costo inscripción -->
+            <div class="mb-3" style="align-items: center">
+              <span
+                class="input-group-text"
+                style="
+                  background-color: #042159;
+                  color: #fff;
+                  font-weight: 500;
+                "
+                >COSTO DE INSCRIPCIÓN</span
+              >
+              <p>$3, 000 por alumno</p>
+            </div>
+            <!-- No. de cuenta -->
+            <div class="mb-3" style="align-items: center">
+              <span
+                class="input-group-text"
+                style="
+                  background-color: #042159;
+                  color: #fff;
+                  font-weight: 500;
+                "
+                >NO. DE CUENTA</span
+              >
+              <p>0101727834</p>
+            </div>
+            <!-- No. de cuenta clabe -->
+            <div class="mb-3" style="align-items: center">
+              <span
+                class="input-group-text"
+                style="
+                  background-color: #042159;
+                  color: #fff;
+                  font-weight: 500;
+                "
+                >NO. DE CUENTA CLABE</span
+              >
+              <p>012680001017278342</p>
+            </div>
+            <!-- Nombre de la empresa -->
+            <div class="mb-3" style="align-items: center">
+              <span
+                class="input-group-text"
+                style="
+                  background-color: #042159;
+                  color: #fff;
+                  font-weight: 500;
+                "
+                >NOMBRE DEL BENEFICIARIO</span
+              >
+              <p>INSTITUTO J FRANCISCO RODRIGUEZ SC</p>
+            </div>
+      `,
+                        focusConfirm: false,
+                        confirmButtonText: `<i class="fa fa-thumbs-up"></i>Entendido`,
+                        confirmButtonAriaLabel: "Thumbs up, great!",
+                      }).then(() => {
+                        // Recargar la página después de confirmar en el segundo modal
+                        location.reload();
+                      });
+                    }
+                  });
                 })
                 .catch((error) => {
                   console.error("Error in upload process: ", error);
