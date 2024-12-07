@@ -13,7 +13,77 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body {
+        background-color: #042159;
+      }
+      .header-images {
+        display: flex;
+        justify-content: space-between;
+        background-color: #042159;
+        padding: 15px 30px;
+        align-items: center;
+      }
+      .header-images img {
+        max-width: 60px;
+        height: auto;
+        object-fit: contain;
+      }
+      .header-images h3 {
+        color: #fff;
+        text-align: center;
+      }
+      #nameCompleto span {
+        background-color: #042159;
+        color: #fff;
+      }
+
+      #infoPadre span {
+        background-color: #042159;
+        color: #fff;
+      }
+
+      .step {
+        border: 10px solid #fff;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #99c8f2;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .blinking-icon {
+        animation: blink 1.6s infinite;
+      }
+      .iconInfo i {
+        background-color: orange;
+        color: white;
+        padding: 2px 5px;
+        font-weight: bolder;
+      }
+      .iconInfo span {
+        font-weight: 500;
+        margin-left: 2px;
+      }
+      #iconSuccess {
+        width: 80px;
+        height: 80px;
+        align-content: center;
+        background-color: limegreen;
+        color: white;
+        font-size: 40pt;
+        border-radius: 50px;
+        margin: auto;
+      }
+    </style>
   </head>
   <header>
     <div class="header-images">
@@ -195,7 +265,7 @@
                   <span
                     class="input-group-text"
                     style="background-color: #042159; color: #fff"
-                    >Especifique la enfermedad</span
+                    >Especifique la enfermedad o alergia</span
                   >
                   <input
                     id="enfermedad"
@@ -394,7 +464,7 @@
                     id="curp"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba la curp"
+                    placeholder="Ej. SAS45..."
                     aria-label="CURP"
                     aria-describedby="CURP"
                     required
@@ -559,7 +629,6 @@
                   <input
                     id="curpPadre"
                     type="text"
-                    placeholder="Escriba la curp"
                     class="form-control"
                     required
                   />
@@ -692,7 +761,7 @@
               <div class="col-md-2 mb-3">
                 <input
                   id="cpPadre"
-                  type="tel"
+                  type="text"
                   class="form-control"
                   placeholder="Código Postal"
                   aria-label="cpPadre"
@@ -854,7 +923,7 @@
                 >
                 <input
                   id="celEmergencia"
-                  type="tel"
+                  type="text"
                   class="form-control"
                   placeholder="Escribe el # celular"
                   aria-label="celEmergencia"
@@ -946,6 +1015,183 @@
             </div>
           </div>
         </div>
+
+        <!-- Modal información guardada con éxito -->
+        <div
+          class="modal fade"
+          id="saveInfoSuccess"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                  Registro guardado
+                </h5>
+              </div>
+              <div class="modal-body text-center">
+                <div id="iconSuccess" class="mt-2">
+                  <i class="bi bi-check"></i>
+                </div>
+
+                <p class="mt-4">Información guardada con éxito</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: Detalles de Hermanos -->
+        <div
+          class="modal fade"
+          id="modalHermanos"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Información de Hermanos
+                </h1>
+              </div>
+              <div class="modal-body">
+                <!-- Pregunta sobre inscripción -->
+                <div class="mb-3" style="align-items: center">
+                  <span
+                    class="input-group-text"
+                    style="
+                      background-color: #042159;
+                      color: #fff;
+                      font-weight: 500;
+                    "
+                    >¿Tiene más hijos que desee inscribir?</span
+                  >
+
+                  <p class="mt-3 fw-semibold">
+                    <b>NOTA:</b> Si elige la opción
+                    <b>"Continuar registro"</b> los datos del padre de familia y
+                    contacto se replicarán en ese registro.
+                  </p>
+                  <p class="mt-2 fw-semibold">
+                    Si no son los mismos datos entonces seleccione finalizar y
+                    cominece un registro nuevo.
+                  </p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="continuarRegistro"
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Continuar registro
+                </button>
+                <button
+                  id="finalizarRegistro"
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-dismiss="modal"
+                >
+                  Finalizar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: Detalles de Pago -->
+        <div
+          class="modal fade"
+          id="modalPago"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Información de Pago
+                </h1>
+              </div>
+              <div class="modal-body">
+                <!-- Costo inscripción -->
+                <div class="mb-3" style="align-items: center">
+                  <span
+                    class="input-group-text"
+                    style="
+                      background-color: #042159;
+                      color: #fff;
+                      font-weight: 500;
+                    "
+                    >COSTO DE INSCRIPCIÓN</span
+                  >
+                  <p>$3, 000 por alumno</p>
+                </div>
+
+                <!-- No. de cuenta -->
+                <div class="mb-3" style="align-items: center">
+                  <span
+                    class="input-group-text"
+                    style="
+                      background-color: #042159;
+                      color: #fff;
+                      font-weight: 500;
+                    "
+                    >NO. DE CUENTA</span
+                  >
+                  <p>0101727834</p>
+                </div>
+                <!-- No. de cuenta clabe -->
+                <div class="mb-3" style="align-items: center">
+                  <span
+                    class="input-group-text"
+                    style="
+                      background-color: #042159;
+                      color: #fff;
+                      font-weight: 500;
+                    "
+                    >NO. DE CUENTA CLABE</span
+                  >
+                  <p>012680001017278342</p>
+                </div>
+                <!-- Nombre de la empresa -->
+                <div class="mb-3" style="align-items: center">
+                  <span
+                    class="input-group-text"
+                    style="
+                      background-color: #042159;
+                      color: #fff;
+                      font-weight: 500;
+                    "
+                    >NOMBRE DEL BENEFICIARIO</span
+                  >
+                  <p>INSTITUTO J FRANCISCO RODRIGUEZ SC</p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="datosPago"
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-dismiss="modal"
+                >
+                  Entendido
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
 
@@ -988,11 +1234,2991 @@
     <!-- MOMENT JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
-    <!-- SCRIPT PARA ALERT PERSONALIZADO -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      $(document).ready(function () {
+        //Desactiva el click derecho en la página
+        /*
+       $("body").on("contextmenu", function (e) {
+        return false;
+      });
+      */
+        $("#contRegistro").hide();
+        $("#errSex").hide();
+        $("#errEnfermedad").hide();
+        $("#errDesEnfermedad").hide();
+        $("#errSangre").hide();
+        $("#duplicarDatos").hide();
+        // Llenar estados y configurar ciudades al cargar el documento
+        llenarEstados();
+        configurarCiudades();
+      });
 
-    <script src="./estados.js"></script>
+      // Datos de estados y ciudades
+      const estadosYCiudades = {
+        Aguascalientes: [
+          "Aguascalientes",
+          "Asientos",
+          "Calvillo",
+          "Cosío",
+          "Jesús María",
+          "Pabellón de Arteaga",
+          "Rincón de Romos",
+          "San José de Gracia",
+          "Tepezalá",
+          "El Llano",
+          "San Francisco de los Romo",
+        ],
+        " Baja California": [
+          "Ensenada",
+          "Mexicali",
+          "Tecate",
+          "Tijuana",
+          "Playas de Rosarito",
+          "San Quintín",
+          "San Felipe",
+        ],
+        "Baja California Sur": [
+          "Comondú",
+          "La Paz",
+          "Loreto",
+          "Los Cabos",
+          "Mulegé",
+        ],
+        Campeche: [
+          "Calkiní",
+          "Campeche",
+          "Carmen",
+          "Champotón",
+          "Hecelchakán",
+          "Hopelchén",
+          "Palizada",
+          "Tenabo",
+          "Escárcega",
+          "Calakmul",
+          "Candelaria",
+          "Seybaplaya",
+        ],
+        Chiapas: [
+          "Acacoyagua",
+          "Acala",
+          "Acapetahua",
+          "Altamirano",
+          "Amatán",
+          "Amatenango de la Frontera",
+          "Amatenango del Valle",
+          "Ángel Albino Corzo",
+          "Arriaga",
+          "Bejucal de Ocampo",
+          "Bella Vista",
+          "Berriozábal",
+          "Bochil",
+          "El Bosque",
+          "Cacahoatán",
+          "Catazajá",
+          "Cintalapa",
+          "Coapilla",
+          "Comitán de Domínguez",
+          "La Concordia",
+          "Copainalá",
+          "Chalchihuitán",
+          "Chamula",
+          "Chanal",
+          "Chapultenango",
+          "Chenalhó",
+          "Chiapa de Corzo",
+          "Chiapilla",
+          "Chicoasén",
+          "Chicomuselo",
+          "Chilón",
+          "Escuintla",
+          "Francisco León",
+          "Frontera Comalapa",
+          "Frontera Hidalgo",
+          "La Grandeza",
+          "Huehuetán",
+          "Huixtán",
+          "Huitiupán",
+          "Huixtla",
+          "La Independencia",
+          "Ixhuatán",
+          "Ixtacomitán",
+          "Ixtapa",
+          "Ixtapangajoya",
+          "Jiquipilas",
+          "Jitotol",
+          "Juárez",
+          "Larráinzar",
+          "La Libertad",
+          "Mapastepec",
+          "Las Margaritas",
+          "Mazapa de Madero",
+          "Mazatán",
+          "Metapa",
+          "Mitontic",
+          "Motozintla",
+          "Nicolás Ruíz",
+          "Ocosingo",
+          "Ocotepec",
+          "Ocozocoautla de Espinosa",
+          "Ostuacán",
+          "Osumacinta",
+          "Oxchuc",
+          "Palenque",
+          "Pantelhó",
+          "Pantepec",
+          "Pichucalco",
+          "Pijijiapan",
+          "El Porvenir",
+          "Villa Comaltitlán",
+          "Pueblo Nuevo Solistahuacán",
+          "Rayón",
+          "Reforma",
+          "Las Rosas",
+          "Sabanilla",
+          "Salto de Agua",
+          "San Cristóbal de las Casas",
+          "San Fernando",
+          "Siltepec",
+          "Simojovel",
+          "Sitalá",
+          "Socoltenango",
+          "Solosuchiapa",
+          "Soyaló",
+          "Suchiapa",
+          "Suchiate",
+          "Sunuapa",
+          "Tapachula",
+          "Tapalapa",
+          "Tapilula",
+          "Tecpatán",
+          "Tenejapa",
+          "Teopisca",
+          "Tila",
+          "Tonalá",
+          "Totolapa",
+          "La Trinitaria",
+          "Tumbalá",
+          "Tuxtla Gutiérrez",
+          "Tuxtla Chico",
+          "Tuzantán",
+          "Tzimol",
+          "Unión Juárez",
+          "Venustiano Carranza",
+          "Villa Corzo",
+          "Villaflores",
+          "Yajalón",
+          "San Lucas",
+          "Zinacantán",
+          "San Juan Cancuc",
+          "Aldama",
+          "Benemérito de las Américas",
+          "Maravilla Tenejapa",
+          "Marqués de Comillas",
+          "Montecristo de Guerrero",
+          "San Andrés Duraznal",
+          "Santiago el Pinar",
+          "Capitán Luis Ángel Vidal",
+          "Rincón Chamula San Pedro",
+          "El Parral",
+          "Emiliano Zapata",
+          "Mezcalapa",
+          "Honduras de la Sierra",
+        ],
+        Chihuahua: [
+          "Ahumada",
+          "Aldama",
+          "Allende",
+          "Aquiles Serdán",
+          "Ascensión",
+          "Bachíniva",
+          "Balleza",
+          "Batopilas de Manuel Gómez Morín",
+          "Bocoyna",
+          "Buenaventura",
+          "Camargo",
+          "Carichí",
+          "Casas Grandes",
+          "Coronado",
+          "Coyame del Sotol",
+          "La Cruz",
+          "Cuauhtémoc",
+          "Cusihuiriachi",
+          "Chihuahua",
+          "Chínipas",
+          "Delicias",
+          "Dr. Belisario Domínguez",
+          "Galeana",
+          "Santa Isabel",
+          "Gómez Farías",
+          "Gran Morelos",
+          "Guachochi",
+          "Guadalupe",
+          "Guadalupe y Calvo",
+          "Guazapares",
+          "Guerrero",
+          "Hidalgo del Parral",
+          "Huejotitán",
+          "Ignacio Zaragoza",
+          "Janos",
+          "Jiménez",
+          "Juárez",
+          "Julimes",
+          "López",
+          "Madera",
+          "Maguarichi",
+          "Manuel Benavides",
+          "Matachí",
+          "Matamoros",
+          "Meoqui",
+          "Morelos",
+          "Moris",
+          "Namiquipa",
+          "Nonoava",
+          "Nuevo Casas Grandes",
+          "Ocampo",
+          "Ojinaga",
+          "Praxedis G. Guerrero",
+          "Riva Palacio",
+          "Rosales",
+          "Rosario",
+          "San Francisco de Borja",
+          "San Francisco de Conchos",
+          "San Francisco del Oro",
+          "Santa Bárbara",
+          "Satevó",
+          "Saucillo",
+          "Temósachic",
+          "El Tule",
+          "Urique",
+          "Uruachi",
+          "Valle de Zaragoza",
+        ],
+        Coahuila: [
+          "Abasolo",
+          "Acuña",
+          "Allende",
+          "Arteaga",
+          "Candela",
+          "Castaños",
+          "Cuatro Ciénegas",
+          "Escobedo",
+          "Francisco I. Madero",
+          "Frontera",
+          "General Cepeda",
+          "Guerrero",
+          "Hidalgo",
+          "Jiménez",
+          "Juárez",
+          "Lamadrid",
+          "Matamoros",
+          "Monclova",
+          "Morelos",
+          "Múzquiz",
+          "Nadadores",
+          "Nava",
+          "Ocampo",
+          "Parras",
+          "Piedras Negras",
+          "Progreso",
+          "Ramos Arizpe",
+          "Sabinas",
+          "Sacramento",
+          "Saltillo",
+          "San Buenaventura",
+          "San Juan de Sabinas",
+          "San Pedro",
+          "Sierra Mojada",
+          "Torreón",
+          "Viesca",
+          "Villa Unión",
+          "Zaragoza",
+        ],
+        Colima: [
+          "Armería",
+          "Colima",
+          "Comala",
+          "Coquimatlán",
+          "Cuauhtémoc",
+          "Ixtlahuacán",
+          "Manzanillo",
+          "Minatitlán",
+          "Tecomán",
+          "Villa de Álvarez",
+        ],
+        Durango: [
+          "Canatlán",
+          "Canelas",
+          "Coneto de Comonfort",
+          "Cuencamé",
+          "Durango",
+          "General Simón Bolívar",
+          "Gómez Palacio",
+          "Guadalupe Victoria",
+          "Guanaceví",
+          "Hidalgo",
+          "Indé",
+          "Lerdo",
+          "Mapimí",
+          "Mezquital",
+          "Nazas",
+          "Nombre de Dios",
+          "Ocampo",
+          "El Oro",
+          "Otáez",
+          "Pánuco de Coronado",
+          "Peñón Blanco",
+          "Poanas",
+          "Pueblo Nuevo",
+          "Rodeo",
+          "San Bernardo",
+          "San Dimas",
+          "San Juan de Guadalupe",
+          "San Juan del Río",
+          "San Luis del Cordero",
+          "San Pedro del Gallo",
+          "Santa Clara",
+          "Santiago Papasquiaro",
+          "Súchil",
+          "Tamazula",
+          "Tepehuanes",
+          "Tlahualilo",
+          "Topia",
+          "Vicente Guerrero",
+          "Nuevo Ideal",
+        ],
+        "Estado de México": [
+          "Acambay de Ruíz Castañeda",
+          "Acolman",
+          "Aculco",
+          "Almoloya de Alquisiras",
+          "Almoloya de Juárez",
+          "Almoloya del Río",
+          "Amanalco",
+          "Amatepec",
+          "Amecameca",
+          "Apaxco",
+          "Atenco",
+          "Atizapán",
+          "Atizapán de Zaragoza",
+          "Atlacomulco",
+          "Atlautla",
+          "Axapusco",
+          "Ayapango",
+          "Calimaya",
+          "Capulhuac",
+          "Coacalco de Berriozábal",
+          "Coatepec Harinas",
+          "Cocotitlán",
+          "Coyotepec",
+          "Cuautitlán",
+          "Chalco",
+          "Chapa de Mota",
+          "Chapultepec",
+          "Chiautla",
+          "Chicoloapan",
+          "Chiconcuac",
+          "Chimalhuacán",
+          "Donato Guerra",
+          "Ecatepec de Morelos",
+          "Ecatzingo",
+          "Huehuetoca",
+          "Hueypoxtla",
+          "Huixquilucan",
+          "Isidro Fabela",
+          "Ixtapaluca",
+          "Ixtapan de la Sal",
+          "Ixtapan del Oro",
+          "Ixtlahuaca",
+          "Xalatlaco",
+          "Jaltenco",
+          "Jilotepec",
+          "Jilotzingo",
+          "Jiquipilco",
+          "Jocotitlán",
+          "Joquicingo",
+          "Juchitepec",
+          "Lerma",
+          "Malinalco",
+          "Melchor Ocampo",
+          "Metepec",
+          "Mexicaltzingo",
+          "Morelos",
+          "Naucalpan de Juárez",
+          "Nezahualcóyotl",
+          "Nextlalpan",
+          "Nicolás Romero",
+          "Nopaltepec",
+          "Ocoyoacac",
+          "Ocuilan",
+          "El Oro",
+          "Otumba",
+          "Otzoloapan",
+          "Otzolotepec",
+          "Ozumba",
+          "Papalotla",
+          "La Paz",
+          "Polotitlán",
+          "Rayón",
+          "San Antonio la Isla",
+          "San Felipe del Progreso",
+          "San Martín de las Pirámides",
+          "San Mateo Atenco",
+          "San Simón de Guerrero",
+          "Santo Tomás",
+          "Soyaniquilpan de Juárez",
+          "Sultepec",
+          "Tecámac",
+          "Tejupilco",
+          "Temamatla",
+          "Temascalapa",
+          "Temascalcingo",
+          "Temascaltepec",
+          "Temoaya",
+          "Tenancingo",
+          "Tenango del Aire",
+          "Tenango del Valle",
+          "Teoloyucan",
+          "Teotihuacán",
+          "Tepetlaoxtoc",
+          "Tepetlixpa",
+          "Tepotzotlán",
+          "Tequixquiac",
+          "Texcaltitlán",
+          "Texcalyacac",
+          "Texcoco",
+          "Tezoyuca",
+          "Tianguistenco",
+          "Timilpan",
+          "Tlalmanalco",
+          "Tlalnepantla de Baz",
+          "Tlatlaya",
+          "Toluca",
+          "Tonatico",
+          "Tultepec",
+          "Tultitlán",
+          "Valle de Bravo",
+          "Villa de Allende",
+          "Villa del Carbón",
+          "Villa Guerrero",
+          "Villa Victoria",
+          "Xonacatlán",
+          "Zacazonapan",
+          "Zacualpan",
+          "Zinacantepec",
+          "Zumpahuacán",
+          "Zumpango",
+          "Cuautitlán Izcalli",
+          "Valle de Chalco Solidaridad",
+          "Luvianos",
+          "San José del Rincón",
+          "Tonanitla",
+        ],
+        Guanajuato: [
+          "Abasolo",
+          "Acámbaro",
+          "San Miguel de Allende",
+          "Apaseo el Alto",
+          "Apaseo el Grande",
+          "Atarjea",
+          "Celaya",
+          "Manuel Doblado",
+          "Comonfort",
+          "Coroneo",
+          "Cortazar",
+          "Cuerámaro",
+          "Doctor Mora",
+          "Dolores Hidalgo Cuna de la Independencia Nacional",
+          "Guanajuato",
+          "Huanímaro",
+          "Irapuato",
+          "Jaral del Progreso",
+          "Jerécuaro",
+          "León",
+          "Moroleón",
+          "Ocampo",
+          "Pénjamo",
+          "Pueblo Nuevo",
+          "Purísima del Rincón",
+          "Romita",
+          "Salamanca",
+          "Salvatierra",
+          "San Diego de la Unión",
+          "San Felipe",
+          "San Francisco del Rincón",
+          "San José Iturbide",
+          "San Luis de la Paz",
+          "Santa Catarina",
+          "Santa Cruz de Juventino Rosas",
+          "Santiago Maravatío",
+          "Silao de la Victoria",
+          "Tarandacuao",
+          "Tarimoro",
+          "Tierra Blanca",
+          "Uriangato",
+          "Valle de Santiago",
+          "Victoria",
+          "Villagrán",
+          "Xichú",
+          "Yuriria",
+        ],
+        Guerrero: [
+          "Acapulco de Juárez",
+          "Ahuacuotzingo",
+          "Ajuchitlán del Progreso",
+          "Alcozauca de Guerrero",
+          "Alpoyeca",
+          "Apaxtla",
+          "Arcelia",
+          "Atenango del Río",
+          "Atlamajalcingo del Monte",
+          "Atlixtac",
+          "Atoyac de Álvarez",
+          "Ayutla de los Libres",
+          "Azoyú",
+          "Benito Juárez",
+          "Buenavista de Cuéllar",
+          "Coahuayutla de José María Izazaga",
+          "Cocula",
+          "Copala",
+          "Copalillo",
+          "Copanatoyac",
+          "Coyuca de Benítez",
+          "Coyuca de Catalán",
+          "Cuajinicuilapa",
+          "Cualác",
+          "Cuautepec",
+          "Cuetzala del Progreso",
+          "Cutzamala de Pinzón",
+          "Chilapa de Álvarez",
+          "Chilpancingo de los Bravo",
+          "Florencio Villarreal",
+          "General Canuto A. Neri",
+          "General Heliodoro Castillo",
+          "Huamuxtitlán",
+          "Huitzuco de los Figueroa",
+          "Iguala de la Independencia",
+          "Igualapa",
+          "Ixcateopan de Cuauhtémoc",
+          "Zihuatanejo de Azueta",
+          "Juan R. Escudero",
+          "Leonardo Bravo",
+          "Malinaltepec",
+          "Mártir de Cuilapan",
+          "Metlatónoc",
+          "Mochitlán",
+          "Olinalá",
+          "Ometepec",
+          " Pedro Ascencio Alquisiras",
+          "Petatlán",
+          "Pilcaya",
+          "Pungarabato",
+          "Quechultenango",
+          "San Luis Acatlán",
+          "San Marcos",
+          "San Miguel Totolapan",
+          "Taxco de Alarcón",
+          "Tecoanapa",
+          "Técpan de Galeana",
+          "Teloloapan",
+          "Tepecoacuilco de Trujano",
+          "Tetipac",
+          "Tixtla de Guerrero",
+          "Tlacoachistlahuaca",
+          "Tlacoapa",
+          "Tlalchapa",
+          "Tlalixtaquilla de Maldonado",
+          "Tlapa de Comonfort",
+          "Tlapehuala",
+          "La Unión de Isidoro Montes de Oca",
+          "Xalpatláhuac",
+          "Xochihuehuetlán",
+          "Xochistlahuaca",
+          "Zapotitlán Tablas",
+          "Zirándaro",
+          "Zitlala",
+          "Eduardo Neri",
+          "Acatepec",
+          "Marquelia",
+          "Cochoapa el Grande",
+          "José Joaquín de Herrera",
+          "Juchitán",
+          "Iliatenco",
+        ],
+        Hidalgo: [
+          "Acatlán",
+          "Acaxochitlán",
+          "Actopan",
+          "Agua Blanca de Iturbide",
+          "Ajacuba",
+          "Alfajayucan",
+          "Almoloya",
+          "Apan",
+          "El Arenal",
+          "Atitalaquia",
+          "Atlapexco",
+          "Atotonilco el Grande",
+          "Atotonilco de Tula",
+          "Calnali",
+          "Cardonal",
+          "Cuautepec de Hinojosa",
+          "Chapantongo",
+          "Chapulhuacán",
+          "Chilcuautla",
+          "Eloxochitlán",
+          "Emiliano Zapata",
+          "Epazoyucan",
+          "Francisco I. Madero",
+          "Huasca de Ocampo",
+          "Huautla",
+          "Huazalingo",
+          "Huehuetla",
+          "Huejutla de Reyes",
+          "Huichapan",
+          "Ixmiquilpan",
+          "Jacala de Ledezma",
+          "Jaltocán",
+          "Juárez Hidalgo",
+          "Lolotla",
+          "Metepec",
+          "San Agustín Metzquititlán",
+          "Metztitlán",
+          "Mineral del Chico",
+          "Mineral del Monte",
+          "La Misión",
+          "Mixquiahuala de Juárez",
+          "Molango de Escamilla",
+          "Nicolás Flores",
+          "Nopala de Villagrán",
+          "Omitlán de Juárez",
+          "San Felipe Orizatlán",
+          "Pacula",
+          "Pachuca de Soto",
+          "Pisaflores",
+          "Progreso de Obregón",
+          "Mineral de la Reforma ",
+          "San Agustín Tlaxiaca",
+          "San Bartolo Tutotepec",
+          "San Salvador ",
+          "Santiago de Anaya",
+          "Santiago Tulantepec de Lugo Guerrero",
+          "Singuilucan",
+          "Tasquillo",
+          "Tecozautla",
+          "Tenango de Doria ",
+          "Tepeapulco",
+          "Tepehuacán de Guerrero",
+          "Tepeji del Río de Ocampo",
+          "Tepetitlán",
+          "Tetepango",
+          "Villa de Tezontepec",
+          "Tezontepec de Aldama",
+          "Tianguistengo",
+          "Tizayuca",
+          "Tlahuelilpan",
+          "Tlahuiltepa",
+          "Tlanalapa",
+          "Tlanchinol",
+          "Tlaxcoapan",
+          "Tolcayuca",
+          "Tula de Allende",
+          "Tulancingo de Bravo",
+          "Xochiatipan",
+          "Xochicoatlán ",
+          "Yahualica",
+          "Zacualtipán de Ángeles",
+          "Zapotlán de Juárez",
+          "Zempoala",
+          "Zimapán",
+        ],
+        Jalisco: [
+          "Zimapán",
+          "Acatlán de Juárez",
+          "Ahualulco de Mercado",
+          "Amacueca",
+          "Amatitán",
+          "Ameca",
+          "San Juanito de Escobedo",
+          "Arandas",
+          "El Arenal",
+          "Atemajac de Brizuela",
+          "Atengo",
+          "Atenguillo",
+          "Atotonilco el Alto",
+          "Atoyac",
+          "Autlán de Navarro",
+          "Ayotlán",
+          "Ayutla",
+          "La Barca",
+          "Bolaños",
+          "Cabo Corrientes",
+          "Casimiro Castillo",
+          "Cihuatlán",
+          "Zapotlán el Grande",
+          "Cocula",
+          "Colotlán",
+          "Concepción de Buenos Aires",
+          "Cuautitlán de García Barragán",
+          "Cuautla",
+          "Cuquío",
+          "Chapala",
+          "Chimaltitán",
+          "Chiquilistlán",
+          "Degollado",
+          "Ejutla",
+          "Encarnación de Díaz",
+          "Etzatlán",
+          "El Grullo",
+          "Guachinango",
+          "Guadalajara",
+          "Hostotipaquillo",
+          "Huejúcar",
+          "Huejuquilla el Alto",
+          "La Huerta",
+          "Ixtlahuacán de los Membrillos",
+          "Ixtlahuacán del Río",
+          "Jalostotitlán",
+          "Jamay",
+          "Jesús María",
+          "Jilotlán de los Dolores",
+          "Jocotepec",
+          "Juanacatlán",
+          "Juchitlán",
+          "Lagos de Moreno",
+          "El Limón",
+          "Magdalena",
+          "Santa María del Oro",
+          "La Manzanilla de la Paz",
+          "Mascota",
+          "Mazamitla",
+          "Mexticacán",
+          "Mezquitic",
+          "Mixtlán",
+          "Ocotlán",
+          "Ojuelos de Jalisco",
+          "Pihuamo",
+          "Poncitlán",
+          "Puerto Vallarta",
+          "Villa Purificación",
+          "Quitupan",
+          "El Salto",
+          "San Cristóbal de la Barranca",
+          "San Diego de Alejandría",
+          "San Juan de los Lagos",
+          "San Julián",
+          "San Marcos",
+          "San Martín de Bolaños",
+          "San Martín Hidalgo",
+          "San Miguel el Alto",
+          "Gómez Farías",
+          "San Sebastián del Oeste",
+          "Santa María de los Ángeles",
+          "Sayula",
+          "Tala",
+          "Talpa de Allende",
+          "Tamazula de Gordiano",
+          "Tapalpa",
+          "Tecalitlán",
+          "Techaluta de Montenegro",
+          "Tecolotlán",
+          "Tenamaxtlán",
+          "Teocaltiche",
+          "Teocuitatlán de Corona",
+          "Tepatitlán de Morelos",
+          "Tequila",
+          "Teuchitlán",
+          "Tizapán el Alto",
+          "Tlajomulco de Zúñiga",
+          "San Pedro Tlaquepaque",
+          "Tolimán",
+          "Tomatlán",
+          "Tonalá",
+          "Tonaya",
+          "Tonila",
+          "Totatiche",
+          "Tototlán",
+          "Tuxcacuesco",
+          "Tuxcueca",
+          "Tuxpan",
+          "Unión de San Antonio",
+          "Unión de Tula",
+          "Valle de Guadalupe",
+          "Valle de Juárez",
+          "San Gabriel",
+          "Villa Corona",
+          "Villa Guerrero",
+          "Villa Hidalgo",
+          "Cañadas de Obregón",
+          "Yahualica de González Gallo",
+          "Zacoalco de Torres",
+          "Zapopan",
+          "Zapotiltic",
+          "Zapotitlán de Vadillo",
+          "Zapotlán del Rey",
+          "Zapotlanejo",
+          "San Ignacio Cerro Gordo",
+        ],
+        "Michoacán de Ocampo": [
+          "Acuitzio",
+          "Aguililla",
+          "Álvaro Obregón",
+          "Angamacutiro",
+          "Angangueo",
+          "Apatzingán",
+          "Aporo",
+          "Aquila",
+          "Ario",
+          "Arteaga",
+          "Briseñas",
+          "Buenavista",
+          "Carácuaro",
+          "Coahuayana",
+          "Coalcomán de Vázquez Pallares",
+          "Coeneo",
+          "Contepec",
+          "Copándaro",
+          "Cotija ",
+          "Cuitzeo",
+          "Charapan",
+          "Charo",
+          "Chavinda",
+          "Cherán",
+          "Chilchota",
+          "Chinicuila",
+          "Chucándiro",
+          "Churintzio",
+          "Churumuco",
+          "Ecuandureo",
+          "Epitacio Huerta",
+          "Erongarícuaro",
+          "Gabriel Zamora",
+          "Hidalgo",
+          "La Huacana",
+          "Huandacareo",
+          "Huaniqueo",
+          "Huetamo",
+          "Huiramba",
+          "Indaparapeo",
+          "Irimbo",
+          "Ixtlán",
+          "Jacona",
+          "Jiménez",
+          "Jiquilpan",
+          "Juárez",
+          "Jungapeo",
+          "Lagunillas",
+          "Madero",
+          "Maravatío",
+          "Marcos Castellanos",
+          "Lázaro Cárdenas",
+          "Morelia",
+          "Morelos",
+          "Múgica",
+          "Nahuatzen",
+          "Nocupétaro",
+          "Nuevo Parangaricutiro",
+          "Nuevo Urecho",
+          "Numarán",
+          "Ocampo",
+          "Pajacuarán",
+          "Panindícuaro",
+          "Parácuaro",
+          "Paracho",
+          "Pátzcuaro",
+          "Penjamillo",
+          "Peribán",
+          "La Piedad",
+          "Purépero",
+          "Puruándiro",
+          "Queréndaro",
+          "Quiroga",
+          "Cojumatlán de Régules",
+          "Los Reyes",
+          "Sahuayo",
+          "San Lucas",
+          "Santa Ana Maya",
+          "Salvador Escalante",
+          "Senguio",
+          "Susupuato",
+          "Tacámbaro",
+          "Tancítaro",
+          "Tangamandapio",
+          "Tangancícuaro",
+          "Tanhuato",
+          "Taretan",
+          "Tarímbaro",
+          "Tepalcatepec",
+          "Tingambato",
+          "Tingüindín",
+          "Tiquicheo de Nicolás Romero",
+          "Tlalpujahua",
+          "Tlazazalca",
+          "Tocumbo",
+          "Tumbiscatío",
+          "Turicato",
+          "Tuxpan",
+          "Tuzantla",
+          "Tzintzuntzan",
+          "Tzitzio",
+          "Uruapan",
+          "Venustiano Carranza",
+          "Villamar",
+          "Vista Hermosa",
+          "Yurécuaro",
+          "Zacapu",
+          "Zamora",
+          "Zináparo",
+          "Zinapécuaro",
+          "Ziracuaretiro",
+          "Zitácuaro",
+          "José Sixto Verduzco",
+        ],
+        Morelos: [
+          "Amacuzac",
+          "Atlatlahucan",
+          "Axochiapan",
+          "Ayala",
+          "Coatlán del Río ",
+          "Cuautla",
+          "Cuernavaca",
+          "Emiliano Zapata",
+          "Huitzilac",
+          "Jantetelco",
+          "Jiutepec",
+          "Jojutla",
+          "Jonacatepec de Leandro Valle",
+          "Mazatepec",
+          "Miacatlán",
+          "Ocuituco",
+          "Puente de Ixtla",
+          "Temixco",
+          "Tepalcingo",
+          "Tepoztlán",
+          "Tetecala",
+          "Tetela del Volcán",
+          "Tlalnepantla",
+          "Tlaltizapán de Zapata",
+          "Tlaquiltenango",
+          "Tlayacapan",
+          "Totolapan",
+          "Xochitepec",
+          "Yautepec",
+          "Yecapixtla",
+          "Zacatepec",
+          "Zacualpan de Amilpas",
+          "Temoac",
+          "Coatetelco",
+          "Xoxocotla",
+          "Hueyapan",
+        ],
+        Nayarit: [
+          "Acaponeta",
+          "Ahuacatlán",
+          "Amatlán de Cañas",
+          "Compostela",
+          "Huajicori",
+          "Ixtlán del Río",
+          "Jala",
+          "Xalisco",
+          "Del Nayar",
+          "Rosamorada",
+          "Ruíz",
+          "San Blas",
+          "San Pedro Lagunillas",
+          "Santa María del Oro",
+          "Santiago Ixcuintla",
+          "Tecuala",
+          "Tepic",
+          "Tuxpan",
+          "La Yesca",
+          "Bahía de Banderas",
+        ],
+        "Nuevo León": [
+          "Abasolo",
+          "Agualeguas",
+          "Los Aldamas",
+          "Allende",
+          "Anáhuac",
+          "Apodaca",
+          "Aramberri",
+          "Bustamante",
+          "Cadereyta Jiménez",
+          "El Carmen",
+          "Cerralvo",
+          "Ciénega de Flores",
+          "China",
+          "Doctor Arroyo",
+          "Doctor Coss",
+          "Doctor González",
+          "Galeana",
+          "García",
+          "San Pedro Garza García",
+          "General Bravo",
+          "General Escobedo",
+          "General Terán",
+          "General Treviño",
+          "General Zaragoza",
+          "General Zuazua",
+          "Guadalupe",
+          "Los Herreras",
+          "Higueras",
+          "Hualahuises",
+          "Iturbide",
+          "Juárez",
+          "Lampazos de Naranjo",
+          "Linares",
+          "Marín",
+          "Melchor Ocampo",
+          "Mier y Noriega",
+          "Mina",
+          "Montemorelos",
+          "Monterrey",
+          "Parás",
+          "Pesquería",
+          "Los Ramones",
+          "Rayones",
+          "Sabinas Hidalgo",
+          "Salinas Victoria",
+          "San Nicolás de los Garza",
+          "Hidalgo",
+          "Santa Catarina",
+          "Santiago",
+          "Vallecillo ",
+          "Villaldama",
+        ],
+        Oaxaca: [
+          "Abejones",
+          "Acatlán de Pérez Figueroa",
+          "Asunción Cacalotepec",
+          "Asunción Cuyotepeji",
+          "Asunción Ixtaltepec",
+          "Asunción Nochixtlán",
+          "Asunción Ocotlán",
+          "Asunción Tlacolulita",
+          "Ayotzintepec",
+          "El Barrio de la Soledad",
+          "Calihualá",
+          "Candelaria Loxicha",
+          "Ciénega de Zimatlán",
+          "Ciudad Ixtepec",
+          "Coatecas Altas",
+          "Coicoyán de las Flores",
+          "La Compañía",
+          "Concepción Buenavista",
+          "Concepción Pápalo",
+          "Constancia del Rosario",
+          "Cosolapa",
+          "Cosoltepec",
+          "Cuilápam de Guerrero",
+          "Cuyamecalco Villa de Zaragoza",
+          "Chahuites",
+          "Chalcatongo de Hidalgo",
+          "Chiquihuitlán de Benito Juárez",
+          "Heroica Ciudad de Ejutla de Crespo",
+          "Eloxochitlán de Flores Magón",
+          "El Espinal",
+          "Tamazulápam del Espíritu Santo",
+          "Fresnillo de Trujano",
+          "Guadalupe Etla",
+          "Guadalupe de Ramírez",
+          "Guelatao de Juárez",
+          "Guevea de Humboldt",
+          "Mesones Hidalgo",
+          "Villa Hidalgo",
+          "Heroica Ciudad de Huajuapan de León",
+          "Huautepec",
+          "Huautla de Jiménez",
+          "Ixtlán de Juárez",
+          "Juchitán de Zaragoza",
+          "Loma Bonita",
+          "Magdalena Apasco",
+          "Magdalena Jaltepec",
+          "Santa Magdalena Jicotlán",
+          "Magdalena Mixtepec",
+          "Magdalena Ocotlán",
+          "Magdalena Peñasco",
+          "Magdalena Teitipac",
+          "Magdalena Tequisistlán",
+          "Magdalena Tlacotepec",
+          "Magdalena Zahuatlán",
+          "Mariscala de Juárez",
+          "Mártires de Tacubaya",
+          "Matías Romero Avendaño",
+          "Mazatlán Villa de Flores",
+          "Miahuatlán de Porfirio Díaz",
+          "Mixistlán de la Reforma",
+          "Monjas",
+          "Natividad",
+          "Nazareno Etla",
+          "Nejapa de Madero",
+          "Ixpantepec Nieves",
+          "Santiago Niltepec",
+          "Oaxaca de Juárez",
+          "Ocotlán de Morelos",
+          "La Pe",
+          "Pinotepa de Don Luis",
+          "Pluma Hidalgo",
+          "San José del Progreso",
+          "Putla Villa de Guerrero",
+          "Santa Catarina Quioquitani",
+          "Reforma de Pineda",
+          "La Reforma",
+          "Reyes Etla",
+          "Rojas de Cuauhtémoc",
+          "Salina Cruz",
+          "San Agustín Amatengo",
+          "San Agustín Atenango",
+          "San Agustín Chayuco",
+          "San Agustín de las Juntas",
+          "San Agustín Etla",
+          "San Agustín Loxicha",
+          "San Agustín Tlacotepec",
+          "San Agustín Yatareni",
+          "San Andrés Cabecera Nueva",
+          "San Andrés Dinicuiti",
+          "San Andrés Huaxpaltepec",
+          "San Andrés Huayápam",
+          "San Andrés Ixtlahuaca",
+          "San Andrés Lagunas",
+          "San Andrés Nuxiño",
+          "San Andrés Paxtlán",
+          "San Andrés Sinaxtla",
+          "San Andrés Solaga",
+          "San Andrés Teotilálpam",
+          "San Andrés Tepetlapa",
+          "San Andrés Yaá",
+          "San Andrés Zabache",
+          "San Andrés Zautla",
+          "San Antonino Castillo Velasco",
+          "San Antonino el Alto",
+          "San Antonino Monte Verde",
+          "San Antonio Acutla",
+          "San Antonio de la Cal",
+          "San Antonio Huitepec",
+          "San Antonio Nanahuatípam",
+          "San Antonio Sinicahua",
+          "San Antonio Tepetlapa",
+          "San Baltazar Chichicápam",
+          "San Baltazar Loxicha",
+          "San Baltazar Yatzachi el Bajo",
+          "San Bartolo Coyotepec",
+          "San Bartolomé Ayautla",
+          "San Bartolomé Loxicha",
+          "San Bartolomé Quialana",
+          "San Bartolomé Yucuañe",
+          "San Bartolomé Zoogocho",
+          "San Bartolo Soyaltepec",
+          "San Bartolo Yautepec",
+          "San Bernardo Mixtepec",
+          "San Blas Atempa",
+          "San Carlos Yautepec",
+          "San Cristóbal Amatlán",
+          "San Cristóbal Amoltepec",
+          "San Cristóbal Lachirioag",
+          "San Cristóbal Suchixtlahuaca",
+          "San Dionisio del Mar",
+          "San Dionisio Ocotepec",
+          "San Dionisio Ocotlán",
+          "San Esteban Atatlahuca",
+          "San Felipe Jalapa de Díaz",
+          "San Felipe Tejalápam",
+          "San Felipe Usila",
+          "San Francisco Cahuacuá",
+          "San Francisco Cajonos",
+          "San Francisco Chapulapa",
+          "San Francisco Chindúa",
+          "San Francisco del Mar",
+          "San Francisco Huehuetlán",
+          "San Francisco Ixhuatán",
+          "San Francisco Jaltepetongo",
+          "San Francisco Lachigoló",
+          "San Francisco Logueche",
+          "San Francisco Nuxaño",
+          "San Francisco Ozolotepec",
+          "San Francisco Sola",
+          "San Francisco Telixtlahuaca",
+          "San Francisco Teopan",
+          "San Francisco Tlapancingo",
+          "San Gabriel Mixtepec",
+          "San Ildefonso Amatlán",
+          "San Ildefonso Sola",
+          "San Ildefonso Villa Alta",
+          "San Jacinto Amilpas",
+          "San Jacinto Tlacotepec",
+          "San Jerónimo Coatlán",
+          "San Jerónimo Silacayoapilla",
+          "San Jerónimo Sosola",
+          "San Jerónimo Taviche",
+          "San Jerónimo Tecóatl",
+          "San Jorge Nuchita",
+          "San José Ayuquila",
+          "San José Chiltepec",
+          "San José del Peñasco",
+          "San José Estancia Grande",
+          "San José Independencia",
+          "San José Lachiguiri",
+          "San José Tenango",
+          "San Juan Achiutla",
+          "San Juan Atepec",
+          "Ánimas Trujano",
+          "San Juan Bautista Atatlahuca",
+          "San Juan Bautista Coixtlahuaca",
+          "San Juan Bautista Cuicatlán",
+          "San Juan Bautista Guelache",
+          "San Juan Bautista Jayacatlán",
+          "San Juan Bautista Lo de Soto",
+          "San Juan Bautista Suchitepec",
+          "San Juan Bautista Tlacoatzintepec",
+          "San Juan Bautista Tlachichilco",
+          "San Juan Bautista Tuxtepec",
+          "San Juan Cacahuatepec",
+          "San Juan Cieneguilla",
+          "San Juan Coatzóspam",
+          "San Juan Colorado",
+          "San Juan Comaltepec",
+          "San Juan Cotzocón",
+          "San Juan Chicomezúchil",
+          "San Juan Chilateca",
+          "San Juan del Estado",
+          "San Juan del Río",
+          "San Juan Diuxi",
+          "San Juan Evangelista Analco",
+          "San Juan Guelavía",
+          "San Juan Guichicovi",
+          "San Juan Ihualtepec",
+          "San Juan Juquila Mixes",
+          "San Juan Juquila Vijanos",
+          "San Juan Lachao",
+          "San Juan Lachigalla",
+          "San Juan Lajarcia",
+          "San Juan Lalana",
+          "San Juan de los Cués",
+          "San Juan Mazatlán",
+          "San Juan Mixtepec",
+          "San Juan Mixtepec",
+          "San Juan Ñumí",
+          "San Juan Ozolotepec",
+          "San Juan Petlapa",
+          "San Juan Quiahije",
+          "San Juan Quiotepec",
+          "San Juan Sayultepec",
+          "San Juan Tabaá",
+          "San Juan Tamazola",
+          "San Juan Teita",
+          "San Juan Teitipac",
+          "San Juan Tepeuxila",
+          "San Juan Teposcolula ",
+          "San Juan Yaeé",
+          "San Juan Yatzona",
+          "San Juan Yucuita",
+          "San Lorenzo",
+          "San Lorenzo Albarradas",
+          "San Lorenzo Cacaotepec",
+          "San Lorenzo Cuaunecuiltitla",
+          "San Lorenzo Texmelúcan",
+          "San Lorenzo Victoria",
+          "San Lucas Camotlán",
+          "San Lucas Ojitlán",
+          "San Lucas Quiaviní",
+          "San Lucas Zoquiápam",
+          "San Luis Amatlán",
+          "San Marcial Ozolotepec",
+          "San Marcos Arteaga",
+          "San Martín de los Cansecos",
+          "San Martín Huamelúlpam",
+          "San Martín Itunyoso",
+          "San Martín Lachilá",
+          "San Martín Peras",
+          "San Martín Tilcajete",
+          "San Martín Toxpalan",
+          "San Martín Zacatepec",
+          "San Mateo Cajonos",
+          "Capulálpam de Méndez",
+          "San Mateo del Mar",
+          "San Mateo Yoloxochitlán",
+          "San Mateo Etlatongo",
+          "San Mateo Nejápam",
+          "San Mateo Peñasco",
+          "San Mateo Piñas",
+          "San Mateo Río Hondo",
+          "San Mateo Sindihui",
+          "San Mateo Tlapiltepec",
+          "San Melchor Betaza",
+          "San Miguel Achiutla",
+          "San Miguel Ahuehuetitlán",
+          "San Miguel Aloápam",
+          "San Miguel Amatitlán",
+          "San Miguel Amatlán",
+          "San Miguel Coatlán",
+          "San Miguel Chicahua",
+          "San Miguel Chimalapa",
+          "San Miguel del Puerto",
+          "San Miguel del Río",
+          "San Miguel Ejutla",
+          "San Miguel el Grande",
+          "San Miguel Huautla",
+          "San Miguel Mixtepec",
+          "San Miguel Panixtlahuaca",
+          "San Miguel Peras",
+          "San Miguel Piedras",
+          "San Miguel Quetzaltepec",
+          "San Miguel Santa Flor",
+          "Villa Sola de Vega",
+          "San Miguel Soyaltepec",
+          "San Miguel Suchixtepec",
+          "Villa Talea de Castro",
+          "San Miguel Tecomatlán",
+          "San Miguel Tenango",
+          "San Miguel Tequixtepec",
+          "San Miguel Tilquiápam",
+          "San Miguel Tlacamama",
+          "San Miguel Tlacotepec",
+          "San Miguel Tulancingo",
+          "San Miguel Yotao",
+          "San Nicolás",
+          "San Nicolás Hidalgo",
+          "San Pablo Coatlán",
+          "San Pablo Cuatro Venados",
+          "San Pablo Etla",
+          "San Pablo Huitzo",
+          "San Pablo Huixtepec",
+          "San Pablo Macuiltianguis",
+          "San Pablo Tijaltepec",
+          "San Pablo Villa de Mitla",
+          "San Pablo Yaganiza",
+          "San Pedro Amuzgos",
+          "San Pedro Apóstol",
+          "San Pedro Atoyac",
+          "San Pedro Cajonos",
+          "San Pedro Coxcaltepec Cántaros",
+          "San Pedro Comitancillo",
+          "San Pedro el Alto",
+          "San Pedro Huamelula",
+          "San Pedro Huilotepec",
+          "San Pedro Ixcatlán",
+          "San Pedro Ixtlahuaca",
+          "San Pedro Jaltepetongo",
+          "San Pedro Jicayán",
+          "San Pedro Jocotipac",
+          "San Pedro Juchatengo",
+          "San Pedro Mártir",
+          "San Pedro Mártir Quiechapa",
+          "San Pedro Mártir Yucuxaco",
+          "San Pedro Mixtepec",
+          "San Pedro Mixtepec",
+          "San Pedro Molinos",
+          "San Pedro Nopala",
+          "San Pedro Ocopetatillo",
+          "San Pedro Ocotepec",
+          "San Pedro Pochutla",
+          "San Pedro Quiatoni",
+          "San Pedro Sochiápam",
+          "San Pedro Tapanatepec",
+          "San Pedro Taviche",
+          "San Pedro Teozacoalco",
+          "San Pedro Teutila",
+          "San Pedro Tidaá",
+          "San Pedro Topiltepec",
+          "San Pedro Totolápam",
+          "Villa de Tututepec",
+          "San Pedro Yaneri",
+          "San Pedro Yólox",
+          "San Pedro y San Pablo Ayutla",
+          "Villa de Etla",
+          "San Pedro y San Pablo Teposcolula",
+          "San Pedro y San Pablo Tequixtepec",
+          "San Pedro Yucunama",
+          "San Raymundo Jalpan",
+          "San Sebastián Abasolo",
+          "San Sebastián Coatlán",
+          "San Sebastián Ixcapa",
+          "San Sebastián Nicananduta",
+          "San Sebastián Río Hondo",
+          "San Sebastián Tecomaxtlahuaca",
+          "San Sebastián Teitipac",
+          "San Sebastián Tutla",
+          "San Simón Almolongas",
+          "San Simón Zahuatlán",
+          "Santa Ana",
+          "Santa Ana Ateixtlahuaca",
+          "Santa Ana Cuauhtémoc",
+          "Santa Ana del Valle",
+          "Santa Ana Tavela",
+          "Santa Ana Tlapacoyan",
+          "Santa Ana Yareni",
+          "Santa Ana Zegache",
+          "Santa Catalina Quierí",
+          "Santa Catarina Cuixtla",
+          "Santa Catarina Ixtepeji",
+          "Santa Catarina Juquila",
+          "Santa Catarina Lachatao",
+          "Santa Catarina Loxicha",
+          "Santa Catarina Mechoacán",
+          "Santa Catarina Minas",
+          "Santa Catarina Quiané",
+          "Santa Catarina Tayata",
+          "Santa Catarina Ticuá",
+          "Santa Catarina Yosonotú",
+          "Santa Catarina Zapoquila",
+          "Santa Cruz Acatepec",
+          "Santa Cruz Amilpas",
+          "Santa Cruz de Bravo",
+          "Santa Cruz Itundujia",
+          "Santa Cruz Mixtepec",
+          "Santa Cruz Nundaco",
+          "Santa Cruz Papalutla",
+          "Santa Cruz Tacache de Mina",
+          "Santa Cruz Tacahua",
+          "Santa Cruz Tayata",
+          "Santa Cruz Xitla",
+          "Santa Cruz Xoxocotlán",
+          "Santa Cruz Zenzontepec",
+          "Santa Gertrudis",
+          "Santa Inés del Monte",
+          "Santa Inés Yatzeche",
+          "Santa Lucía del Camino",
+          "Santa Lucía Miahuatlán",
+          "Santa Lucía Monteverde",
+          "Santa Lucía Ocotlán",
+          "Santa María Alotepec",
+          "Santa María Apazco",
+          "Santa María la Asunción",
+          "Heroica Ciudad de Tlaxiaco",
+          "Ayoquezco de Aldama",
+          "Santa María Atzompa",
+          "Santa María Camotlán",
+          "Santa María Colotepec",
+          "Santa María Cortijo",
+          "Santa María Coyotepec",
+          "Santa María Chachoápam",
+          "Villa de Chilapa de Díaz",
+          "Santa María Chilchotla",
+          "Santa María Chimalapa",
+          "Santa María del Rosario",
+          "Santa María del Tule",
+          "Santa María Ecatepec",
+          "Santa María Guelacé",
+          "Santa María Guienagati",
+          "Santa María Huatulco",
+          "Santa María Huazolotitlán",
+          "Santa María Ipalapa",
+          "Santa María Ixcatlán",
+          "Santa María Jacatepec",
+          "Santa María Jalapa del Marqués",
+          "Santa María Jaltianguis",
+          "Santa María Lachixío",
+          "Santa María Mixtequilla",
+          "Santa María Nativitas",
+          "Santa María Nduayaco",
+          "Santa María Ozolotepec",
+          "Santa María Pápalo",
+          "Santa María Peñoles",
+          "Santa María Petapa",
+          "Santa María Quiegolani",
+          "Santa María Sola",
+          "Santa María Tataltepec",
+          "Santa María Tecomavaca",
+          "Santa María Temaxcalapa",
+          "Santa María Temaxcaltepec",
+          "Santa María Teopoxco",
+          "Santa María Tepantlali",
+          "Santa María Texcatitlán",
+          "Santa María Tlahuitoltepec",
+          "Santa María Tlalixtac",
+          "Santa María Tonameca",
+          "Santa María Totolapilla",
+          "Santa María Xadani",
+          "Santa María Yalina",
+          "Santa María Yavesía",
+          "Santa María Yolotepec",
+          "Santa María Yosoyúa",
+          "Santa María Yucuhiti",
+          "Santa María Zacatepec",
+          "Santa María Zaniza",
+          "Santa María Zoquitlán",
+          "Santiago Amoltepec",
+          "Santiago Apoala",
+          "Santiago Apóstol",
+          "Santiago Astata",
+          "Santiago Atitlán",
+          "Santiago Ayuquililla",
+          "Santiago Cacaloxtepec",
+          "Santiago Camotlán",
+          "Santiago Comaltepec",
+          "Villa de Santiago Chazumba",
+          "Villa de Santiago Chazumba",
+          "Santiago del Río",
+          "Santiago Huajolotitlán",
+          "Santiago Huauclilla",
+          "Santiago Ihuitlán Plumas",
+          "Santiago Ixcuintepec",
+          "Santiago Ixtayutla",
+          "Santiago Jamiltepec",
+          "Santiago Jocotepec",
+          "Santiago Juxtlahuaca",
+          "Santiago Lachiguiri",
+          "Santiago Lalopa",
+          "Santiago Laollaga",
+          "Santiago Laxopa",
+          "Santiago Llano Grande",
+          "Santiago Matatlán",
+          "Santiago Miltepec",
+          "Santiago Minas",
+          "Santiago Nacaltepec",
+          "Santiago Nejapilla",
+          "Santiago Nundiche",
+          "Santiago Nuyoó",
+          "Santiago Pinotepa Nacional",
+          "Santiago Suchilquitongo",
+          "Santiago Tamazola",
+          "Santiago Tapextla",
+          "Villa Tejúpam de la Unión",
+          "Santiago Tenango",
+          "Santiago Tepetlapa",
+          "Santiago Tetepec",
+          "Santiago Texcalcingo",
+          "Santiago Textitlán",
+          "Santiago Tilantongo",
+          "Santiago Tillo",
+          "Santiago Tlazoyaltepec",
+          "Santiago Xanica",
+          "Santiago Xiacuí",
+          "Santiago Yaitepec",
+          "Santiago Yaveo",
+          "Santiago Yolomécatl",
+          "Santiago Yosondúa",
+          "Santiago Yucuyachi",
+          "Santiago Zacatepec",
+          "Santiago Zoochila",
+          "Nuevo Zoquiápam",
+          "Santo Domingo Ingenio",
+          "Santo Domingo Albarradas",
+          "Santo Domingo Armenta",
+          "Santo Domingo Chihuitán",
+          "Santo Domingo de Morelos",
+          "Santo Domingo Ixcatlán",
+          "Santo Domingo Nuxaá",
+          "Santo Domingo Ozolotepec",
+          "Santo Domingo Petapa",
+          "Santo Domingo Roayaga",
+          "Santo Domingo Tehuantepec",
+          "Santo Domingo Teojomulco",
+          "Santo Domingo Tepuxtepec",
+          "Santo Domingo Tlatayápam",
+          "Santo Domingo Tomaltepec",
+          "Santo Domingo Tonalá",
+          "Santo Domingo Tonaltepec",
+          "Santo Domingo Xagacía",
+          "Santo Domingo Yanhuitlán",
+          "Santo Domingo Yodohino",
+          "Santo Domingo Zanatepec",
+          "Santos Reyes Nopala",
+          "Santos Reyes Pápalo",
+          "Santos Reyes Tepejillo",
+          "Santos Reyes Yucuná",
+          "Santo Tomás Jalieza",
+          "Santo Tomás Mazaltepec",
+          "Santo Tomás Ocotepec",
+          "Santo Tomás Tamazulapan",
+          "San Vicente Coatlán",
+          "San Vicente Lachixío",
+          "San Vicente Nuñú",
+          "Silacayoápam",
+          "Sitio de Xitlapehua",
+          "Soledad Etla",
+          "Villa de Tamazulápam del Progreso",
+          "Tanetze de Zaragoza",
+          "Taniche",
+          "Tataltepec de Valdés",
+          "Teococuilco de Marcos Pérez",
+          "Teotitlán de Flores Magón",
+          "Teotitlán del Valle",
+          "Teotongo",
+          "Tepelmeme Villa de Morelos",
+          "Heroica Villa Tezoatlán de Segura y Luna, Cuna de la Independencia de Oaxaca",
+          "San Jerónimo Tlacochahuaya",
+          "Tlacolula de Matamoros",
+          "Tlacotepec Plumas",
+          "Tlalixtac de Cabrera",
+          "Totontepec Villa de Morelos",
+          "Trinidad Zaachila",
+          "La Trinidad Vista Hermosa",
+          "Unión Hidalgo",
+          "Valerio Trujano",
+          "San Juan Bautista Valle Nacional",
+          "Villa Díaz Ordaz",
+          "Yaxe",
+          "Magdalena Yodocono de Porfirio Díaz",
+          "Yogana",
+          "Yutanduchi de Guerrero",
+          "Villa de Zaachila",
+          "San Mateo Yucutindoo",
+          "Zapotitlán Lagunas",
+          "Zapotitlán Palmas",
+          "Santa Inés de Zaragoza",
+          "Zimatlán de Álvarez",
+        ],
+        Puebla: [
+          "Acajete",
+          "Acateno",
+          "Acatlán",
+          "Acatzingo",
+          "Acteopan",
+          "Ahuacatlán",
+          "Ahuatlán",
+          "Ahuazotepec",
+          "Ahuehuetitla",
+          "Ajalpan",
+          "Albino Zertuche",
+          "Aljojuca",
+          "Altepexi",
+          "Amixtlán",
+          "Amozoc",
+          "Aquixtla",
+          "Atempan",
+          "Atexcal",
+          "Atlixco",
+          "Atoyatempan",
+          "Atzala",
+          "Atzitzihuacán",
+          "Atzitzintla",
+          "Axutla",
+          "Ayotoxco de Guerrero",
+          "Calpan",
+          "Caltepec",
+          "Camocuautla",
+          "Caxhuacan",
+          "Coatepec",
+          "Coatzingo",
+          "Cohetzala",
+          "Cohuecan",
+          "Coronango",
+          "Coxcatlán",
+          "Coyomeapan",
+          "Coyotepec",
+          "Cuapiaxtla de Madero",
+          "Cuautempan",
+          "Cuautinchán",
+          "Cuautlancingo",
+          "Cuayuca de Andrade",
+          "Cuetzalan del Progreso",
+          "Cuyoaco",
+          "Chalchicomula de Sesma",
+          "Chapulco",
+          "Chiautla",
+          "Chiautzingo",
+          "Chiconcuautla",
+          "Chichiquila",
+          "Chietla",
+          "Chigmecatitlán",
+          "Chignahuapan",
+          "Chignautla",
+          "Chila",
+          "Chila de la Sal",
+          "Honey",
+          "Chilchotla",
+          "Chinantla",
+          "Domingo Arenas",
+          "Eloxochitlán",
+          "Epatlán",
+          "Esperanza",
+          "Francisco Z. Mena",
+          "General Felipe Ángeles",
+          "Guadalupe",
+          "Guadalupe Victoria",
+          "Hermenegildo Galeana",
+          "Huaquechula",
+          "Huatlatlauca",
+          "Huauchinango",
+          "Huehuetla",
+          "Huehuetlán el Chico",
+          "Huejotzingo",
+          "Hueyapan",
+          "Hueytamalco",
+          "Hueytlalpan",
+          "Huitzilan de Serdán",
+          "Huitziltepec",
+          "Atlequizayan",
+          "Ixcamilpa de Guerrero",
+          "Ixcaquixtla",
+          "Ixtacamaxtitlán",
+          "Ixtepec",
+          "Izúcar de Matamoros",
+          "Jalpan",
+          "Jolalpan",
+          "Jonotla",
+          "Jopala",
+          "Juan C. Bonilla",
+          "Juan Galindo",
+          "Juan N. Méndez",
+          "Lafragua",
+          "Libres",
+          "La Magdalena Tlatlauquitepec",
+          "Mazapiltepec de Juárez",
+          "Mixtla",
+          "Molcaxac",
+          "Cañada Morelos",
+          "Naupan",
+          "Nauzontla",
+          "Nealtican",
+          "Nicolás Bravo",
+          "Nopalucan",
+          "Ocotepec",
+          "Ocoyucan",
+          "Olintla",
+          "Oriental",
+          "Pahuatlán",
+          "Palmar de Bravo",
+          "Pantepec",
+          "Petlalcingo",
+          "Piaxtla",
+          "Puebla",
+          "Quecholac",
+          "Quimixtlán",
+          "Rafael Lara Grajales",
+          "Los Reyes de Juárez",
+          "San Andrés Cholula",
+          "San Antonio Cañada",
+          "San Diego la Mesa Tochimiltzingo",
+          "San Felipe Teotlalcingo",
+          "San Felipe Tepatlán",
+          "San Gabriel Chilac",
+          "San Gregorio Atzompa",
+          "San Jerónimo Tecuanipan",
+          "San Jerónimo Xayacatlán",
+          "San José Chiapa",
+          "San José Miahuatlán",
+          "San Juan Atenco",
+          "San Juan Atzompa",
+          "San Martín Texmelucan",
+          "San Martín Totoltepec",
+          "San Matías Tlalancaleca",
+          "San Miguel Ixitlán",
+          "San Miguel Xoxtla",
+          "San Nicolás Buenos Aires",
+          "San Nicolás de los Ranchos",
+          "San Pablo Anicano",
+          "San Pedro Cholula",
+          "San Pedro Yeloixtlahuaca",
+          "San Salvador el Seco",
+          "San Salvador el Verde",
+          "San Salvador Huixcolotla",
+          "San Sebastián Tlacotepec",
+          "Santa Catarina Tlaltempan",
+          "Santa Inés Ahuatempan",
+          "Santa Isabel Cholula",
+          "Santiago Miahuatlán",
+          "Huehuetlán el Grande",
+          "Santo Tomás Hueyotlipan",
+          "Soltepec",
+          "Tecali de Herrera",
+          "Tecamachalco",
+          "Tecomatlán",
+          "Tehuacán",
+          "Tehuitzingo",
+          "Tenampulco",
+          "Teopantlán",
+          "Teotlalco",
+          "Tepanco de López",
+          "Tepango de Rodríguez",
+          "Tepatlaxco de Hidalgo",
+          "Tepeaca",
+          "Tepemaxalco",
+          "Tepeojuma",
+          "Tepetzintla",
+          "Tepexco",
+          "Tepexi de Rodríguez",
+          "Tepeyahualco",
+          "Tepeyahualco de Cuauhtémoc",
+          "Tetela de Ocampo",
+          "Teteles de Ávila Castillo",
+          "Teziutlán",
+          "Tianguismanalco",
+          "Tilapa",
+          "Tlacotepec de Benito Juárez",
+          "Tlacuilotepec",
+          "Tlachichuca",
+          "Tlahuapan",
+          "Tlaltenango",
+          "Tlanepantla",
+          "Tlaola",
+          "Tlapacoya",
+          "Tlapanalá",
+          "Tlatlauquitepec",
+          "Tlaxco",
+          "Tochimilco",
+          "Tochtepec",
+          "Totoltepec de Guerrero",
+          "Tulcingo",
+          "Tuzamapan de Galeana",
+          "Tzicatlacoyan",
+          "Venustiano Carranza",
+          "Vicente Guerrero",
+          "Xayacatlán de Bravo",
+          "Xicotepec",
+          "Xicotlán",
+          "Xiutetelco",
+          "Xochiapulco",
+          "Xochiltepec",
+          "Xochitlán de Vicente Suárez",
+          "Xochitlán Todos Santos",
+          "Yaonáhuac",
+          "Yehualtepec",
+          "Zacapala",
+          "Zacapoaxtla",
+          "Zacatlán",
+          "Zapotitlán",
+          "Zapotitlán de Méndez",
+          "Zaragoza",
+          "Zautla",
+          "Zihuateutla",
+          "Zinacatepec",
+          "Zongozotla",
+          "Zoquiapan",
+          "Zoquitlán",
+        ],
+        Querétaro: [
+          "Amealco de Bonfil",
+          "Pinal de Amoles",
+          "Arroyo Seco",
+          "Cadereyta de Montes",
+          "Colón",
+          "Corregidora",
+          "Ezequiel Montes",
+          "Huimilpan",
+          "Jalpan de Serra",
+          "Landa de Matamoros",
+          "El Marqués",
+          "Pedro Escobedo",
+          "Peñamiller",
+          "Querétaro",
+          "San Joaquín",
+          "San Juan del Río",
+          "Tequisquiapan",
+          "Tolimán",
+        ],
+        "Quintana Roo": [
+          "Cozumel",
+          "Felipe Carrillo Puerto",
+          "Isla Mujeres",
+          "Othón P. Blanco",
+          "Benito Juárez",
+          "José María Morelos",
+          "Lázaro Cárdenas",
+          "Solidaridad",
+          "Tulum",
+          "Bacalar",
+          "Puerto Morelos",
+        ],
+        "San Luis Potosí": [
+          "Ahualulco",
+          "Alaquines",
+          "Aquismón",
+          "Armadillo de los Infante",
+          "Cárdenas",
+          "Catorce",
+          "Cedral",
+          "Cerritos",
+          "Cerro de San Pedro",
+          "Ciudad del Maíz",
+          "Ciudad Fernández",
+          "Tancanhuitz",
+          "Ciudad Valles",
+          "Coxcatlán",
+          "Charcas",
+          "Ebano",
+          "Guadalcázar",
+          "Huehuetlán",
+          "Lagunillas",
+          "Matehuala",
+          "Mexquitic de Carmona",
+          "Moctezuma",
+          "Rayón",
+          "Rioverde",
+          "Salinas",
+          "San Antonio",
+          "San Ciro de Acosta",
+          "San Luis Potosí",
+          "San Martín Chalchicuautla",
+          "San Nicolás Tolentino",
+          "Santa Catarina",
+          "Santa María del Río",
+          "Santo Domingo",
+          "San Vicente Tancuayalab",
+          "Soledad de Graciano Sánchez",
+          "Tamasopo",
+          "Tamazunchale",
+          "Tampacán",
+          "Tampamolón Corona",
+          "Tamuín",
+          "Tanlajás",
+          "Tanquián de Escobedo",
+          "Tierra Nueva",
+          "Vanegas",
+          "Venado",
+          "Villa de Arriaga",
+          "Villa de Guadalupe",
+          "Villa de la Paz",
+          "Villa de Ramos",
+          "Villa de Reyes",
+          "Villa Hidalgo",
+          "Villa Juárez",
+          "Axtla de Terrazas",
+          "Xilitla",
+          "Zaragoza",
+          "Villa de Arista",
+          "Matlapa",
+          "El Naranjo",
+        ],
+        Sinaloa: [
+          "Ahome",
+          "Angostura",
+          "Badiraguato",
+          "Concordia",
+          "Cosalá",
+          "Culiacán",
+          "Choix",
+          "Elota",
+          "Escuinapa",
+          "El Fuerte",
+          "Guasave ",
+          "Mazatlán",
+          "Mocorito",
+          "Rosario",
+          "Salvador Alvarado",
+          "San Ignacio",
+          "Sinaloa",
+          "Navolato",
+        ],
+        Sonora: [
+          "Aconchi",
+          "Agua Prieta",
+          "Alamos",
+          "Altar",
+          "Arivechi",
+          "Arizpe",
+          "Atil",
+          "Bacadéhuachi",
+          "Bacanora",
+          "Bacerac",
+          "Bacoachi",
+          "Bácum",
+          "Banámichi",
+          "Baviácora",
+          "Bavispe",
+          "Benjamín Hill",
+          "Caborca",
+          "Cajeme",
+          "Cananea",
+          "Carbó",
+          "La Colorada",
+          "Cucurpe",
+          "Cumpas",
+          "Divisaderos",
+          "Empalme",
+          "Etchojoa",
+          "Fronteras",
+          "Granados",
+          "Guaymas",
+          "Hermosillo",
+          "Huachinera",
+          "Huásabas",
+          "Huatabampo",
+          "Huépac",
+          "Imuris",
+          "Magdalena",
+          "Mazatán",
+          "Moctezuma",
+          "Naco",
+          "Nácori Chico",
+          "Nacozari de García",
+          "Navojoa",
+          "Nogales",
+          "Ónavas",
+          "Opodepe",
+          "Oquitoa",
+          "Pitiquito",
+          "Puerto Peñasco",
+          "Quiriego",
+          "Rayón",
+          "Rosario",
+          "Sahuaripa",
+          "San Felipe de Jesús",
+          "San Javier",
+          "San Luis Río Colorado",
+          "San Miguel de Horcasitas",
+          "San Pedro de la Cueva",
+          "Santa Ana",
+          "Santa Cruz",
+          "Sáric",
+          "Soyopa",
+          "Suaqui Grande",
+          "Tepache",
+          "Trincheras",
+          "Tubutama",
+          "Ures",
+          "Villa Hidalgo",
+          "Villa Pesqueira",
+          "Yécora",
+          "General Plutarco Elías Calles",
+          "Benito Juárez",
+          "San Ignacio Río Muerto",
+        ],
+        Tabasco: [
+          "Balancán",
+          "Cárdenas",
+          "Centla",
+          "Centro",
+          "Comalcalco",
+          "Cunduacán",
+          "Emiliano Zapata",
+          "Huimanguillo",
+          "Jalapa",
+          "Jalpa de Méndez",
+          "Jonuta",
+          "Macuspana",
+          "Nacajuca",
+          "Paraíso",
+          "Tacotalpa",
+          "Teapa",
+          "Tenosique",
+        ],
+        Tamaulipas: [
+          "Abasolo",
+          "Aldama",
+          "Altamira",
+          "Antiguo Morelos",
+          "Burgos",
+          "Bustamante",
+          "Camargo",
+          "Casas",
+          "Ciudad Madero",
+          "Cruillas",
+          "Gómez Farías",
+          "González",
+          "Güémez",
+          "Guerrero",
+          "Gustavo Díaz Ordaz",
+          "Hidalgo",
+          "Jaumave",
+          "Jiménez",
+          "Llera",
+          "Mainero",
+          "El Mante",
+          "Matamoros",
+          "Méndez",
+          "Mier",
+          "Miguel Alemán",
+          "Miquihuana",
+          "Nuevo Laredo",
+          "Nuevo Morelos",
+          "Ocampo",
+          "Padilla",
+          "Palmillas",
+          "Reynosa",
+          "Río Bravo",
+          "San Carlos",
+          "San Fernando",
+          "San Nicolás",
+          "Soto la Marina",
+          "Tampico",
+          "Tula",
+          "Valle Hermoso",
+          "Victoria",
+          "Villagrán",
+          "Xicoténcatl",
+        ],
+        Tlaxcala: [
+          "Amaxac de Guerrero",
+          "Apetatitlán de Antonio Carvajal",
+          "Atlangatepec",
+          "Atltzayanca",
+          "Apizaco",
+          "Calpulalpan",
+          "El Carmen Tequexquitla",
+          "Cuapiaxtla",
+          "Cuaxomulco",
+          "Chiautempan",
+          "Muñoz de Domingo Arenas",
+          "Españita",
+          "Huamantla",
+          "Hueyotlipan",
+          "Ixtacuixtla de Mariano Matamoros",
+          "Ixtenco",
+          "Mazatecochco de José María Morelos",
+          "Contla de Juan Cuamatzi",
+          "Tepetitla de Lardizábal",
+          "Sanctórum de Lázaro Cárdenas",
+          "Nanacamilpa de Mariano Arista",
+          "Acuamanala de Miguel Hidalgo",
+          "Natívitas",
+          "Panotla",
+          "San Pablo del Monte",
+          "Santa Cruz Tlaxcala",
+          "Tenancingo",
+          "Teolocholco",
+          "Tepeyanco",
+          "Terrenate",
+          "Tetla de la Solidaridad",
+          "Tetlatlahuca",
+          "Tlaxcala",
+          "Tlaxco",
+          "Tocatlán",
+          "Totolac",
+          "Ziltlaltépec de Trinidad Sánchez Santos",
+          "Tzompantepec",
+          "Xaloztoc",
+          "Xaltocan",
+          "Papalotla de Xicohténcatl",
+          "Xicohtzinco",
+          "Yauhquemehcan",
+          "Zacatelco",
+          "Benito Juárez",
+          "Emiliano Zapata",
+          "Lázaro Cárdenas",
+          "La Magdalena Tlaltelulco",
+          "San Damián Texóloc",
+          "San Francisco Tetlanohcan",
+          "San Jerónimo Zacualpan",
+          "San José Teacalco",
+          "San Juan Huactzinco",
+          "San Lorenzo Axocomanitla",
+          "San Lucas Tecopilco",
+          "Santa Ana Nopalucan",
+          "Santa Apolonia Teacalco",
+          "Santa Catarina Ayometla",
+          "Santa Cruz Quilehtla",
+          "Santa Isabel Xiloxoxtla",
+        ],
+        Veracruz: [
+          "Acajete",
+          "Acatlán",
+          "Acayucan",
+          "Actopan",
+          "Acula",
+          "Acultzingo",
+          "Camarón de Tejeda",
+          "Alpatláhuac",
+          "Alto Lucero de Gutiérrez Barrios",
+          "Altotonga",
+          "Alvarado",
+          "Amatitlán",
+          "Naranjos Amatlán",
+          "Amatlán de los Reyes",
+          "Angel R. Cabada",
+          "La Antigua",
+          "Apazapan",
+          "Aquila",
+          "Astacinga",
+          "Atlahuilco",
+          "Atoyac",
+          "Atzacan",
+          "Atzalan",
+          "Tlaltetela",
+          "Ayahualulco",
+          "Banderilla",
+          "Benito Juárez",
+          "Boca del Río",
+          "Calcahualco",
+          "Camerino Z. Mendoza",
+          "Carrillo Puerto",
+          "Catemaco",
+          "Cazones de Herrera",
+          "Cerro Azul",
+          "Citlaltépetl",
+          "Coacoatzintla",
+          "Coahuitlán",
+          "Coatepec",
+          "Coatzacoalcos",
+          "Coatzintla",
+          "Coetzala",
+          "Colipa",
+          "Comapa",
+          "Córdoba",
+          "Cosamaloapan de Carpio",
+          "Cosautlán de Carvajal",
+          "Coscomatepec",
+          "Cosoleacaque",
+          "Cotaxtla",
+          "Coxquihui",
+          "Coyutla",
+          "Cuichapa",
+          "Cuitláhuac",
+          "Chacaltianguis",
+          "Chalma",
+          "Chiconamel",
+          "Chiconquiaco",
+          "Chicontepec",
+          "Chinameca",
+          "Chinampa de Gorostiza",
+          "Las Choapas",
+          "Chocamán",
+          "Chontla",
+          "Chumatlán",
+          "Emiliano Zapata",
+          "Espinal",
+          "Filomeno Mata",
+          "Fortín",
+          "Gutiérrez Zamora",
+          "Hidalgotitlán",
+          "Huatusco",
+          "Huayacocotla",
+          "Hueyapan de Ocampo",
+          "Huiloapan de Cuauhtémoc",
+          "Ignacio de la Llave",
+          "Ilamatlán",
+          "Isla",
+          "Ixcatepec",
+          "Ixhuacán de los Reyes",
+          "Ixhuatlán del Café",
+          "Ixhuatlancillo",
+          "Ixhuatlán del Sureste",
+          "Ixhuatlán de Madero",
+          "Ixmatlahuacan",
+          "Ixtaczoquitlán",
+          "Jalacingo",
+          "Xalapa",
+          "Jalcomulco",
+          "Jáltipan",
+          "Jamapa",
+          "Jesús Carranza",
+          "Xico",
+          "Jilotepec",
+          "Juan Rodríguez Clara",
+          "Juchique de Ferrer",
+          "Landero y Coss",
+          "Lerdo de Tejada",
+          "Magdalena",
+          "Maltrata",
+          "Manlio Fabio Altamirano",
+          "Mariano Escobedo",
+          "Martínez de la Torre",
+          "Mecatlán",
+          "Mecayapan",
+          "Medellín de Bravo",
+          "Miahuatlán",
+          "Las Minas",
+          "Minatitlán",
+          "Misantla",
+          "Mixtla de Altamirano",
+          "Moloacán",
+          "Naolinco",
+          "Naranjal",
+          "Nautla",
+          "Nogales",
+          "Oluta",
+          "Omealca",
+          "Orizaba",
+          "Otatitlán",
+          "Oteapan",
+          "Ozuluama de Mascareñas",
+          "Pajapan",
+          "Pánuco",
+          "Papantla",
+          "Paso del Macho",
+          "Paso de Ovejas",
+          "La Perla ",
+          "Perote",
+          "Platón Sánchez",
+          "Playa Vicente",
+          "Poza Rica de Hidalgo",
+          "Las Vigas de Ramírez",
+          "Pueblo Viejo",
+          "Puente Nacional",
+          "Rafael Delgado",
+          "Rafael Lucio",
+          "Los Reyes",
+          "Río Blanco",
+          "Saltabarranca",
+          "San Andrés Tenejapan",
+          "San Andrés Tuxtla",
+          "San Juan Evangelista",
+          "Santiago Tuxtla",
+          "Sayula de Alemán",
+          "Soconusco",
+          "Sochiapa",
+          "Soledad Atzompa",
+          "Soledad de Doblado",
+          "Soteapan",
+          "Tamalín",
+          "Tamiahua",
+          "Tampico Alto",
+          "Tancoco",
+          "Tantima",
+          "Tantoyuca",
+          "Tatatila",
+          "Castillo de Teayo",
+          "Tecolutla",
+          "Tehuipango",
+          "Álamo Temapache",
+          "Tempoal",
+          "Tenampa",
+          "Tenochtitlán",
+          "Teocelo",
+          "Tepatlaxco",
+          "Tepetlán",
+          "Tepetzintla",
+          "Tequila",
+          "José Azueta",
+          "Texcatepec",
+          "Texhuacán",
+          "Texistepec",
+          "Tezonapa",
+          "Tierra Blanca",
+          "Tihuatlán",
+          "Tlacojalpan",
+          "Tlacolulan",
+          "Tlacotalpan",
+          "Tlacotepec de Mejía",
+          "Tlachichilco",
+          "Tlalixcoyan",
+          "Tlalnelhuayocan",
+          "Tlapacoyan",
+          "Tlaquilpa",
+          "Tlilapan",
+          "Tomatlán",
+          "Tonayán",
+          "Totutla",
+          "Tuxpan",
+          "Tuxtilla",
+          "Ursulo Galván",
+          "Vega de Alatorre",
+          "Veracruz",
+          "Villa Aldama",
+          "Xoxocotla",
+          "Yanga",
+          "Yecuatla",
+          "Zacualpan",
+          "Zaragoza",
+          "Zentla",
+          "Zongolica",
+          "Zontecomatlán de López y Fuentes",
+          "Zozocolco de Hidalgo",
+          "Agua Dulce",
+          "El Higo",
+          "Nanchital de Lázaro Cárdenas del Río",
+          "Tres Valles",
+          "Carlos A. Carrillo",
+          "Tatahuicapan de Juárez",
+          "Uxpanapa",
+          "San Rafael",
+          "Santiago Sochiapan",
+        ],
+        Yucatán: [
+          "Abalá",
+          "Acanceh",
+          "Akil",
+          "Baca",
+          "Bokobá",
+          "Buctzotz",
+          "Cacalchén",
+          "Calotmul",
+          "Cansahcab",
+          "Cantamayec",
+          "Celestún",
+          "Cenotillo",
+          "Conkal",
+          "Cuncunul",
+          "Cuzamá",
+          "Chacsinkín",
+          "Chankom",
+          "Chapab",
+          "Chemax",
+          "Chicxulub Pueblo",
+          "Chichimilá",
+          "Chikindzonot",
+          "Chocholá",
+          "Chumayel",
+          "Dzán",
+          "Dzemul",
+          "Dzidzantún",
+          "Dzilam de Bravo",
+          "Dzilam González",
+          "Dzitás",
+          "Dzoncauich",
+          "Espita",
+          "Halachó",
+          "Hocabá",
+          "Hoctún",
+          "Homún",
+          "Huhí",
+          "Hunucmá",
+          "Ixil",
+          "Izamal",
+          "Kanasín",
+          "Kantunil",
+          "Kaua",
+          "Kinchil",
+          "Kopomá",
+          "Mama",
+          "Maní",
+          "Maxcanú",
+          "Mayapán",
+          "Mérida",
+          "Mocochá",
+          "Motul",
+          "Muna",
+          "Muxupip",
+          "Opichén",
+          "Oxkutzcab",
+          "Panabá",
+          "Peto",
+          "Progreso",
+          "Quintana Roo",
+          "Río Lagartos",
+          "Sacalum",
+          "Samahil",
+          "Sanahcat",
+          "San Felipe",
+          "Santa Elena",
+          "Seyé",
+          "Sinanché",
+          "Sotuta",
+          "Sucilá",
+          "Sudzal",
+          "Suma",
+          "Tahdziú",
+          "Tahmek",
+          "Teabo",
+          "Tecoh",
+          "Tekal de Venegas",
+          "Tekantó",
+          "Tekax",
+          "Tekit",
+          "Tekom",
+          "Telchac Pueblo",
+          "Telchac Puerto",
+          "Temax",
+          "Temozón",
+          "Tepakán",
+          "Tetiz",
+          "Teya",
+          "Ticul",
+          "Timucuy",
+          "Tinum",
+          "Tixcacalcupul",
+          "Tixkokob",
+          "Tixmehuac",
+          "Tixpéhual",
+          "Tizimín",
+          "Tunkás",
+          "Tzucacab",
+          "Uayma",
+          "Ucú",
+          "Umán",
+          "Valladolid",
+          "Xocchel",
+          "Yaxcabá",
+          "Yaxkukul",
+          "Yobaín",
+        ],
+        Zacatecas: [
+          "Apozol",
+          "Apulco",
+          "Atolinga",
+          "Benito Juárez",
+          "Calera",
+          "Cañitas de Felipe Pescador",
+          "Concepción del Oro",
+          "Cuauhtémoc",
+          "Chalchihuites",
+          "Fresnillo",
+          "Trinidad García de la Cadena",
+          "Genaro Codina",
+          "General Enrique Estrada",
+          "General Francisco R. Murguía",
+          "El Plateado de Joaquín Amaro",
+          "General Pánfilo Natera",
+          "Guadalupe",
+          "Huanusco",
+          "Jalpa",
+          "Jerez",
+          "Jiménez del Teul",
+          "Juan Aldama",
+          "Juchipila",
+          "Loreto",
+          "Luis Moya",
+          "Mazapil",
+          "Melchor Ocampo",
+          "Mezquital del Oro",
+          "Miguel Auza",
+          "Momax",
+          "Monte Escobedo",
+          "Morelos",
+          "Moyahua de Estrada",
+          "Nochistlán de Mejía",
+          "Noria de Ángeles",
+          "Ojocaliente",
+          "Pánuco",
+          "Pinos",
+          "Río Grande",
+          "Sain Alto",
+          "El Salvador",
+          "Sombrerete",
+          "Susticacán",
+          "Tabasco",
+          "Tepechitlán",
+          "Tepetongo",
+          "Teúl de González Ortega",
+          "Tlaltenango de Sánchez Román",
+          "Valparaíso",
+          "Vetagrande",
+          "Villa de Cos",
+          "Villa García",
+          "Villa González Ortega",
+          "Villa Hidalgo",
+          "Villanueva",
+          "Zacatecas",
+          "Trancoso",
+          "Santa María de la Paz",
+        ],
+      };
 
-    <script src="./functions.js"></script>
+      // Llenar el selector de estados
+      const llenarEstados = () => {
+        const $estadoSelect = $("#estadoSelect");
+
+        // Agregar las opciones de los estados
+        Object.keys(estadosYCiudades).forEach((estado) => {
+          $estadoSelect.append(`<option value="${estado}">${estado}</option>`);
+        });
+      };
+
+      // Configurar el selector de ciudades basado en el estado seleccionado
+      const configurarCiudades = () => {
+        const $estadoSelect = $("#estadoSelect");
+        const $ciudadSelect = $("#ciudadSelect");
+
+        $ciudadSelect.prop("disabled", true); // Deshabilitar inicialmente
+
+        $estadoSelect.on("change", function () {
+          const estadoSeleccionado = $(this).val();
+          $ciudadSelect
+            .empty()
+            .append("<option selected>Seleccionar ciudad...</option>");
+
+          if (estadoSeleccionado && estadosYCiudades[estadoSeleccionado]) {
+            $ciudadSelect.prop("disabled", false);
+
+            estadosYCiudades[estadoSeleccionado].forEach((ciudad) => {
+              $ciudadSelect.append(
+                `<option value="${ciudad}">${ciudad}</option>`
+              );
+            });
+          } else {
+            $ciudadSelect.prop("disabled", true);
+          }
+        });
+      };
+    </script>
+
+    <script>
+      // Script para paginación
+      const form = document.getElementById("multiStepForm");
+      const steps = document.querySelectorAll(".step");
+      const paginationItems = document.querySelectorAll(
+        ".pagination .page-item"
+      );
+      const prevButton = document.querySelector(".prev-step");
+      const nextButton = document.querySelector(".next-step");
+      let currentStep = 0;
+
+      // Función para mover a un paso específico
+      function moveToStep(newStep) {
+        if (newStep < 0 || newStep >= steps.length) return;
+
+        // Validar el paso actual antes de cambiar
+        const currentStepElement = steps[currentStep];
+        if (currentStepElement.querySelector("input:invalid")) {
+          currentStepElement.querySelector("input:invalid").reportValidity();
+          return;
+        }
+
+        // Ocultar el paso actual
+        steps[currentStep].style.display = "none";
+        paginationItems[currentStep + 1].classList.remove("active");
+
+        // Mostrar el nuevo paso
+        steps[newStep].style.display = "block";
+        paginationItems[newStep + 1].classList.add("active");
+
+        // Alternar visibilidad de botones
+        prevButton.classList.toggle("d-none", newStep === 0);
+        nextButton.classList.toggle("d-none", newStep === steps.length - 1);
+
+        currentStep = newStep;
+      }
+
+      // Evento para el botón "Siguiente"
+      nextButton.addEventListener("click", function () {
+        moveToStep(currentStep + 1);
+      });
+
+      // Evento para el botón "Anterior"
+      prevButton.addEventListener("click", function () {
+        moveToStep(currentStep - 1);
+      });
+
+      // Evento para los ítems de paginación
+      paginationItems.forEach((item, index) => {
+        if (item.dataset.step) {
+          item.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetStep = parseInt(item.dataset.step) - 1;
+            moveToStep(targetStep);
+          });
+        }
+      });
+
+      // Inicializar primer paso
+      steps[0].style.display = "block";
+      paginationItems[1].classList.add("active");
+      prevButton.classList.add("d-none");
+
+      //Vistas de modales
+      const registroModal = new bootstrap.Modal(
+        document.getElementById("saveInfo")
+      );
+      const successModal = new bootstrap.Modal(
+        document.getElementById("saveInfoSuccess")
+      );
+      const modalHermanos = new bootstrap.Modal(
+        document.getElementById("modalHermanos")
+      );
+      const modalPagos = new bootstrap.Modal(
+        document.getElementById("modalPago")
+      );
+
+      /*
+       document
+        .getElementById("datosPago")
+        .addEventListener("click", function () {
+          location.reload();
+        });
+      */
+
+      document
+        .getElementById("registrarBtn")
+        .addEventListener("click", function () {
+          registroModal.show();
+          const nameEstudiante =
+            document.getElementById("nameEstudiante").value;
+          const apEstudiante = document.getElementById("apEstudiante").value;
+          const amEstudiante = document.getElementById("amEstudiante").value;
+          const genero = document.getElementById("genero").value;
+          const tipoSangre = document.getElementById("tsEstudiante").value;
+          const fnEstudiante = document.getElementById("fnEstudiante").value;
+          const selectedEnfermedad = document.querySelectorAll(
+            'input[name="enfermedadOption"]:checked'
+          );
+          const enfermedadOp = Array.from(selectedEnfermedad).map(
+            (checkbox) => checkbox.value
+          );
+          const enfermedad = document.getElementById("enfermedad").value;
+          const religion = document.getElementById("religion").value;
+          const observaciones = document.getElementById("observaciones").value;
+          const nivelEscolar = document.getElementById("nivelEscolar").value;
+          const gradoEscolar = document.getElementById("gradoEscolar").value;
+          const cicloEscolar = document.getElementById("cicloEscolar").value;
+          const promedio = document.getElementById("promedio").value;
+          const escuela = document.getElementById("escuelaProcedencia").value;
+          const boletaEstudiante = document.getElementById("boleta").files[0];
+          const curpEstudiante = document.getElementById("curp").value;
+          const curpFileEstudiante =
+            document.getElementById("fileCurp").files[0];
+          const actaNacimientoEstudiante =
+            document.getElementById("actaNacimiento").files[0];
+          const namePadre = document.getElementById("namePadre").value;
+          const apPadre = document.getElementById("apPadre").value;
+          const amPadre = document.getElementById("amPadre").value;
+          const parentesco = document.getElementById("parentesco").value;
+          const tipoSangrePadre = document.getElementById("tipoSangre").value;
+          const fechaNacimiento = document.getElementById("fnPadre").value;
+          const curpPadre = document.getElementById("curpPadre").value;
+          const curpFilePadre =
+            document.getElementById("curpFilePadre").files[0];
+          const inePadre1 = document.getElementById("inePadre").files[0];
+          const inePadre2 = document.getElementById("inePadre").files[1];
+          const emailPadre = document.getElementById("emailPadre").value;
+          const telCasa = document.getElementById("telCasa").value;
+          const phone = document.getElementById("celPadre").value;
+          const calle = document.getElementById("callePadre").value;
+          const numero = document.getElementById("numPadre").value;
+          const colonia = document.getElementById("colPadre").value;
+          const cp = document.getElementById("cpPadre").value;
+          const estado = document.getElementById("estadoSelect").value;
+          const ciudad = document.getElementById("ciudadSelect").value;
+          const ocupacion = document.getElementById("ocupacion").value;
+          const estadoCivil = document.getElementById("estadoCivil").value;
+          const nameContacto = document.getElementById("nameEmergencia").value;
+          const apContacto = document.getElementById("apEmergencia").value;
+          const amContacto = document.getElementById("amEmergencia").value;
+          const parentescoContacto =
+            document.getElementById("parentescoContacto").value;
+          const celContacto = document.getElementById("celEmergencia").value;
+          const nameCompleto = namePadre + " " + apPadre + " " + amPadre;
+          const timestamp = moment(fechaNacimiento, "YYYY-MM-DD").valueOf();
+
+          db.collection("inscripciones")
+            .add({
+              name: namePadre,
+              primerApellido: apPadre,
+              segundoApellido: amPadre,
+              rol: "Padre de familia",
+              parentesco: parentesco,
+              tipoSangre: tipoSangrePadre,
+              fechaNacimiento: timestamp
+                ? firebase.firestore.Timestamp.fromMillis(timestamp)
+                : null,
+              curp: curpPadre,
+              email: emailPadre,
+              telCasa,
+              phone,
+              direccion: `${calle} ${numero}, ${colonia}. ${cp}. ${estado}, ${ciudad}`,
+              ocupacion,
+              estadoCivil,
+              estudiantes: [],
+              contacto: {
+                name: nameContacto,
+                primerApellido: apContacto,
+                segundoApellido: amContacto,
+                parentesco: parentescoContacto,
+                phone: celContacto,
+              },
+              createAt: firebase.firestore.Timestamp.now(),
+            })
+            .then((docRef) => {
+              const idDoc = docRef.id;
+
+              const fileUploads = [
+                { file: curpFilePadre, type: "curp", field: "curpFile" },
+                { file: inePadre1, type: "ine", field: "ineFrente" },
+                { file: inePadre2, type: "ine", field: "ineReves" },
+              ].map((upload) =>
+                upload.file
+                  ? uploadCurpFile(
+                      upload.file,
+                      nameCompleto + "_" + idDoc,
+                      upload.type
+                    ).then((downloadURL) => {
+                      return db
+                        .collection("inscripciones")
+                        .doc(idDoc)
+                        .update({ [upload.field]: downloadURL });
+                    })
+                  : Promise.resolve()
+              );
+
+              return uploadAlumno(
+                idDoc,
+                nameEstudiante,
+                apEstudiante,
+                amEstudiante,
+                genero,
+                tipoSangre,
+                fnEstudiante,
+                enfermedadOp,
+                enfermedad,
+                religion,
+                observaciones,
+                nivelEscolar,
+                gradoEscolar,
+                cicloEscolar,
+                promedio,
+                escuela,
+                boletaEstudiante,
+                curpEstudiante,
+                curpFileEstudiante,
+                actaNacimientoEstudiante
+              )
+                .then((idEstudiante) => {
+                  const nameFolder = `${nameEstudiante} ${apEstudiante} ${amEstudiante}`;
+
+                  const studentFileUploads = [
+                    {
+                      file: curpFileEstudiante,
+                      type: "curp",
+                      field: "curpFile",
+                    },
+                    {
+                      file: actaNacimientoEstudiante,
+                      type: "acta_nacimiento",
+                      field: "actaNacimiento",
+                    },
+                    {
+                      file: boletaEstudiante,
+                      type: "boleta",
+                      field: "boleta",
+                    },
+                  ].map((upload) =>
+                    upload.file
+                      ? uploadCurpFile(
+                          upload.file,
+                          nameFolder,
+                          upload.type
+                        ).then((downloadURL) => {
+                          return db
+                            .collection("inscripciones")
+                            .doc(idEstudiante)
+                            .update({ [upload.field]: downloadURL });
+                        })
+                      : Promise.resolve()
+                  );
+
+                  return Promise.all([
+                    ...fileUploads,
+                    ...studentFileUploads,
+                    db
+                      .collection("inscripciones")
+                      .doc(idDoc)
+                      .update({
+                        estudiantes: [{ idEstudiante, perfil: false }],
+                      }),
+                  ]);
+                })
+                .then(() => {
+                  moveToStep(0);
+                  registroModal.hide();
+                  setTimeout(() => {
+                    successModal.show();
+                  }, 1000);
+
+                  setTimeout(() => {
+                    successModal.hide();
+                    modalPagos.show();
+                  }, 3000);
+                })
+                .catch((error) => {
+                  console.error("Error in upload process: ", error);
+                });
+            })
+            .catch((error) => {
+              console.error("Error adding document: ", error);
+            });
+        });
+
+      function uploadCurpFile(file, usuario, carpeta) {
+        // Validate inputs
+        if (!file || !usuario || !carpeta) {
+          console.error("Missing file, usuario, or carpeta parameter");
+          return Promise.reject("Invalid input");
+        }
+
+        // Initialize storage reference
+        const storage = firebase.storage();
+        const storageRef = storage.ref();
+        const uploadPath = `inscripciones/${usuario}/${carpeta}/${file.name}`;
+        const uploadTask = storageRef.child(uploadPath).put(file);
+
+        return new Promise((resolve, reject) => {
+          // Listen for state changes, errors, and completion of the upload
+          uploadTask.on(
+            firebase.storage.TaskEvent.STATE_CHANGED,
+            (snapshot) => {
+              // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              //console.log(`Upload is ${progress.toFixed(2)}% done`);
+
+              switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // 'paused'
+                  // console.log("Upload is paused");
+                  break;
+                case firebase.storage.TaskState.RUNNING: // 'running'
+                  // console.log("Upload is running");
+                  break;
+              }
+            },
+            (error) => {
+              // Handle errors
+              console.error("Upload failed", error);
+              switch (error.code) {
+                case "storage/unauthorized":
+                  console.error(
+                    "User doesn't have permission to access the object"
+                  );
+                  break;
+                case "storage/canceled":
+                  console.error("User canceled the upload");
+                  break;
+                case "storage/unknown":
+                  console.error(
+                    "Unknown error occurred:",
+                    error.serverResponse
+                  );
+                  break;
+              }
+              reject(error);
+            },
+            () => {
+              // Upload completed successfully, now get the download URL
+              uploadTask.snapshot.ref
+                .getDownloadURL()
+                .then((downloadURL) => {
+                  // console.log("File available at", downloadURL);
+                  resolve(downloadURL);
+                })
+                .catch((error) => {
+                  console.error("Failed to get download URL", error);
+                  reject(error);
+                });
+            }
+          );
+        });
+      }
+
+      async function uploadAlumno(
+        idDoc,
+        nameEstudiante,
+        apEstudiante,
+        amEstudiante,
+        genero,
+        tipoSangre,
+        fnEstudiante,
+        enfermedadOp,
+        enfermedad,
+        religion,
+        observaciones,
+        nivelEscolar,
+        gradoEscolar,
+        cicloEscolar,
+        promedio,
+        escuela,
+        boletaEstudiante,
+        curpEstudiante,
+        curpFileEstudiante,
+        actaNacimientoEstudiante
+      ) {
+        try {
+          // Add document to Firestore
+
+          // Upload files concurrently
+          const timestamp = moment(fnEstudiante, "YYYY-MM-DD").valueOf();
+
+          const docRef = await db.collection("inscripciones").add({
+            idPadre: idDoc,
+            name: nameEstudiante,
+            primerApellido: apEstudiante,
+            segundoApellido: amEstudiante,
+            genero,
+            tipoSangre,
+            fechaNacimiento: firebase.firestore.Timestamp.fromMillis(timestamp),
+            enfermedad,
+            religion,
+            observaciones,
+            nivelEscolar,
+            grado: gradoEscolar,
+            cicloEscolar,
+            escuelaProveniente: escuela,
+            curp: curpEstudiante,
+            createAt: new Date(),
+          });
+
+          return docRef.id;
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          throw error;
+        }
+      }
+    </script>
   </body>
 </html>
