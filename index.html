@@ -445,12 +445,7 @@
                   >
                     Boleta de Calificaciones/Certificado de Estudios
                   </label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="boleta"
-                    required
-                  />
+                  <input type="file" class="form-control" id="boleta" />
                 </div>
                 <div class="mb-3">
                   <label
@@ -479,12 +474,7 @@
                   >
                     Acta de Nacimiento
                   </label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="actaNacimiento"
-                    required
-                  />
+                  <input type="file" class="form-control" id="actaNacimiento" />
                 </div>
               </div>
             </div>
@@ -3817,12 +3807,14 @@
                       upload.file,
                       nameCompleto + "_" + idDoc,
                       upload.type
-                    ).then((downloadURL) => {
-                      return db
-                        .collection("inscripciones")
-                        .doc(idDoc)
-                        .update({ [upload.field]: downloadURL });
-                    })
+                    )
+                      .then((downloadURL) => {
+                        return db
+                          .collection("inscripciones")
+                          .doc(idDoc)
+                          .update({ [upload.field]: downloadURL });
+                      })
+                      .catch((e) => console.log(e))
                   : Promise.resolve()
               );
 
@@ -3895,15 +3887,16 @@
                 })
                 .then(() => {
                   // registroModal.hide();
-                  Swal.fire({
-                    title: "¡Registro guardado con éxito!",
-                    icon: "success",
-                    confirmButtonText: "Aceptar",
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      Swal.fire({
-                        title: "<strong><u>INFORMACIÓN DE PAGO</u></strong>",
-                        html: ` <!-- Costo inscripción -->
+                  setTimeout(() => {
+                    Swal.fire({
+                      title: "¡Registro guardado con éxito!",
+                      icon: "success",
+                      confirmButtonText: "Aceptar",
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        Swal.fire({
+                          title: "<strong><u>INFORMACIÓN DE PAGO</u></strong>",
+                          html: ` <!-- Costo inscripción -->
             <div class="mb-3" style="align-items: center">
               <span
                 class="input-group-text"
@@ -3956,15 +3949,16 @@
               <p>INSTITUTO J FRANCISCO RODRIGUEZ SC</p>
             </div>
       `,
-                        focusConfirm: false,
-                        confirmButtonText: `<i class="fa fa-thumbs-up"></i>Entendido`,
-                        confirmButtonAriaLabel: "Thumbs up, great!",
-                      }).then(() => {
-                        // Recargar la página después de confirmar en el segundo modal
-                        location.reload();
-                      });
-                    }
-                  });
+                          focusConfirm: false,
+                          confirmButtonText: `<i class="fa fa-thumbs-up"></i>Entendido`,
+                          confirmButtonAriaLabel: "Thumbs up, great!",
+                        }).then(() => {
+                          // Recargar la página después de confirmar en el segundo modal
+                          location.reload();
+                        });
+                      }
+                    });
+                  }, 3000);
                 })
                 .catch((error) => {
                   console.error("Error in upload process: ", error);
@@ -3977,8 +3971,13 @@
 
       function uploadCurpFile(file, usuario, carpeta) {
         // Validate inputs
-        if (!file || !usuario || !carpeta) {
-          console.error("Missing file, usuario, or carpeta parameter");
+        if (!file) {
+          console.warn("No file provided. Returning an empty string.");
+          return Promise.resolve(""); // Return an empty string if no file
+        }
+
+        if (!usuario || !carpeta) {
+          console.error("Missing usuario or carpeta parameter");
           return Promise.reject("Invalid input");
         }
 
@@ -3996,14 +3995,11 @@
               // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
               const progress =
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              //console.log(`Upload is ${progress.toFixed(2)}% done`);
 
               switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED: // 'paused'
-                  // console.log("Upload is paused");
                   break;
                 case firebase.storage.TaskState.RUNNING: // 'running'
-                  // console.log("Upload is running");
                   break;
               }
             },
@@ -4033,7 +4029,6 @@
               uploadTask.snapshot.ref
                 .getDownloadURL()
                 .then((downloadURL) => {
-                  // console.log("File available at", downloadURL);
                   resolve(downloadURL);
                 })
                 .catch((error) => {
