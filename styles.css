@@ -1,0 +1,69 @@
+body {
+  background-color: #042159;
+}
+.header-images {
+  display: flex;
+  justify-content: space-between;
+  background-color: #042159;
+  padding: 15px 30px;
+  align-items: center;
+}
+.header-images img {
+  max-width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+.header-images h3 {
+  color: #fff;
+  text-align: center;
+}
+#nameCompleto span {
+  background-color: #042159;
+  color: #fff;
+}
+
+#infoPadre span {
+  background-color: #042159;
+  color: #fff;
+}
+
+.step {
+  border: 10px solid #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #99c8f2;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinking-icon {
+  animation: blink 1.6s infinite;
+}
+.iconInfo i {
+  background-color: orange;
+  color: white;
+  padding: 2px 5px;
+  font-weight: bolder;
+}
+.iconInfo span {
+  font-weight: 500;
+  margin-left: 2px;
+}
+#iconSuccess {
+  width: 80px;
+  height: 80px;
+  align-content: center;
+  background-color: limegreen;
+  color: white;
+  font-size: 40pt;
+  border-radius: 50px;
+  margin: auto;
+}
