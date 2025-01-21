@@ -12,6 +12,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
       rel="stylesheet"
@@ -314,74 +315,143 @@
       <!-- Paso 1: Datos del Alumno -->
       <div class="form-page active">
         <h2>Datos del Alumno</h2>
-        <label for="student_firstname">Nombre(s)</label>
-        <input
-          type="text"
-          name="student_firstname"
-          id="student_firstname"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label for="student_firstname">Nombre(s)</label>
+            <input
+              type="text"
+              name="student_firstname"
+              id="student_firstname"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="student_lastname_father">Apellido Paterno</label>
+            <input
+              type="text"
+              name="student_lastname_father"
+              id="student_lastname_father"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="student_lastname_mother">Apellido Materno</label>
+            <input
+              type="text"
+              name="student_lastname_mother"
+              id="student_lastname_mother"
+            />
+          </div>
+        </div>
 
-        <label for="student_lastname_father">Apellido Paterno</label>
-        <input
-          type="text"
-          name="student_lastname_father"
-          id="student_lastname_father"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <div>
+              <label for="student_gender">Género</label>
+              <select name="student_gender" id="student_gender" required>
+                <option value="">Seleccione</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+              </select>
 
-        <label for="student_lastname_mother">Apellido Materno</label>
-        <input
-          type="text"
-          name="student_lastname_mother"
-          id="student_lastname_mother"
-          required
-        />
+              <!-- Input adicional que se mostrará cuando seleccionen "otro" -->
+              <div id="otherGenderContainer" style="display: none">
+                <label for="other_gender">Especifique género</label>
+                <input
+                  type="text"
+                  id="other_gender"
+                  name="other_gender"
+                  required
+                  placeholder="Especifique su género"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="student_blood_type">Tipo de Sangre</label>
+            <select name="student_blood_type" id="student_blood_type" required>
+              <option value="">Seleccione</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+        </div>
 
-        <label for="student_gender">Género</label>
-        <select name="student_gender" id="student_gender" required>
-          <option value="Seleccione">Seleccione</option>
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
-          <option value="otro">Otro</option>
-        </select>
+        <div class="row g-3 align-items-center">
+          <div class="col-12">
+            <label for="birth_day">Fecha de Nacimiento</label>
+          </div>
+          <div class="col-md-4 mt-0" style="margin-bottom: 0px">
+            <select
+              name="birth_day"
+              id="birth_day"
+              class="form-select"
+              required
+            >
+              <option value="">Día</option>
+            </select>
+          </div>
+          <div class="col-md-4 mt-0">
+            <select
+              name="birth_month"
+              id="birth_month"
+              class="form-select"
+              required
+            >
+              <option value="">Mes</option>
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+          </div>
+          <div class="col-md-4 mt-0">
+            <select
+              name="birth_year"
+              id="birth_year"
+              class="form-select"
+              required
+            >
+              <option value="">Año</option>
+            </select>
+          </div>
+        </div>
 
-        <label for="student_blood_type">Tipo de Sangre</label>
-        <select name="student_blood_type" id="student_blood_type" required>
-          <option value="seleecione">Seleccione</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-        </select>
-
-        <label for="student_birthdate">Fecha de Nacimiento</label>
-        <input
-          type="date"
-          name="student_birthdate"
-          id="student_birthdate"
-          required
-        />
-
-        <label for="student_illness">Padece alguna enfermedad:</label>
-        <select name="student_illness" id="student_illness" required>
-          <option value="Seleccione">Seleccione</option>
-          <option value="sí">Sí</option>
-          <option value="no">No</option>
-        </select>
-
-        <label for="student_illness_details"
-          >Especifique la enfermedad o alergia</label
-        >
-        <input
-          type="text"
-          name="student_illness_details"
-          id="student_illness_details"
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-5">
+            <label for="student_illness">Padece alguna enfermedad:</label>
+            <select name="student_illness" id="student_illness" required>
+              <option value="">Seleccione</option>
+              <option value="sí">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="col-md-7">
+            <label for="student_illness_details"
+              >Especifique la enfermedad o alergia</label
+            >
+            <input
+              type="text"
+              name="student_illness_details"
+              id="student_illness_details"
+            />
+          </div>
+        </div>
 
         <label for="student_religion">Religión</label>
         <input type="text" name="student_religion" id="student_religion" />
@@ -397,31 +467,30 @@
       <!-- Paso 2: Datos Académicos -->
       <div class="form-page">
         <h2>Datos Académicos</h2>
-        <label for="academic_level">Nivel Escolar</label>
-        <select name="academic_level" id="academic_level" required>
-          <option value="seleccione">Seleccione</option>
-          <option value="preescolar">Preescolar</option>
-          <option value="primaria">Primaria</option>
-          <option value="secundaria">Secundaria</option>
-          <option value="preparatoria">Preparatoria</option>
-        </select>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label for="academic_level">Nivel Escolar</label>
+            <select name="academic_level" id="academic_level" required>
+              <option value="seleccione">Seleccione</option>
+              <option value="preescolar">Preescolar</option>
+              <option value="primaria">Primaria</option>
+              <option value="secundaria">Secundaria</option>
+              <option value="preparatoria">Preparatoria</option>
+            </select>
+          </div>
 
-        <label for="academic_grade">Grado</label>
-        <select name="academic_grade" id="academic_grade" required>
-          <option value="seleccione">Seleccione</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
+          <div class="col-md-4">
+            <label for="academic_grade">Grado</label>
+            <select name="academic_grade" id="academic_grade" required>
+              <option value="seleccione">Seleccione</option>
+            </select>
+          </div>
 
-        <label for="ciclo">Ciclo Escolar</label>
-        <input type="text" id="ciclo" value="2025-2026" disabled />
-
-        <label for="academic_avg">Promedio</label>
-        <input type="number" name="academic_avg" id="academic_avg" required />
+          <div class="col-md-4">
+            <label for="ciclo">Ciclo Escolar</label>
+            <input type="text" id="ciclo" value="2025-2026" disabled />
+          </div>
+        </div>
 
         <label for="academic_previous_school">Escuela de Procedencia</label>
         <input
@@ -431,7 +500,7 @@
           required
         />
 
-        <label for="academic_report_card">Anexos Requeridos</label>
+        <label for="academic_report_card">ANEXOS REQUERIDOS</label>
         <p>Boleta de Calificaciones/Certificado de Estudios</p>
         <input
           type="file"
@@ -471,58 +540,112 @@
       <!-- Paso 3: Datos del Padre/Madre -->
       <div class="form-page">
         <h2>Datos del Padre/Madre</h2>
-        <label for="parent_firstname">Nombre(s)</label>
-        <input
-          type="text"
-          name="parent_firstname"
-          id="parent_firstname"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label for="parent_firstname">Nombre(s)</label>
+            <input
+              type="text"
+              name="parent_firstname"
+              id="parent_firstname"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="parent_lastname_father">Apellido Paterno</label>
+            <input
+              type="text"
+              name="parent_lastname_father"
+              id="parent_lastname_father"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="parent_lastname_mother">Apellido Materno</label>
+            <input
+              type="text"
+              name="parent_lastname_mother"
+              id="parent_lastname_mother"
+            />
+          </div>
+        </div>
 
-        <label for="parent_lastname_father">Apellido Paterno</label>
-        <input
-          type="text"
-          name="parent_lastname_father"
-          id="parent_lastname_father"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label for="parent_relationship">Parentesco</label>
+            <select
+              name="parent_relationship"
+              id="parent_relationship"
+              required
+            >
+              <option value="seleccione">Seleccione</option>
+              <option value="padre">Padre</option>
+              <option value="madre">Madre</option>
+              <option value="tutor">Tutor</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="parent_blood_type">Tipo de Sangre</label>
+            <select name="parent_blood_type" id="parent_blood_type" required>
+              <option value="seleccione">Seleccione</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+        </div>
 
-        <label for="parent_lastname_mother">Apellido Materno</label>
-        <input
-          type="text"
-          name="parent_lastname_mother"
-          id="parent_lastname_mother"
-          required
-        />
-
-        <label for="parent_relationship">Parentesco</label>
-        <select name="parent_relationship" id="parent_relationship" required>
-          <option value="seleccione">Seleccione</option>
-          <option value="padre">Padre</option>
-          <option value="madre">Madre</option>
-          <option value="tutor">Tutor</option>
-        </select>
-
-        <label for="parent_blood_type">Tipo de Sangre</label>
-        <select name="parent_blood_type" id="parent_blood_type" required>
-          <option value="seleccione">Seleccione</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-        </select>
-
-        <label for="parent_birthdate">Fecha de Nacimiento</label>
-        <input
-          type="date"
-          name="parent_birthdate"
-          id="parent_birthdate"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-12">
+            <label>Fecha de Nacimiento</label>
+          </div>
+          <div class="col-md-4 mt-0" style="margin-bottom: 0px">
+            <select
+              name="birth_day_parent"
+              id="birth_day_parent"
+              class="form-select"
+              required
+            >
+              <option value="">Día</option>
+            </select>
+          </div>
+          <div class="col-md-4 mt-0">
+            <select
+              name="birth_month_parent"
+              id="birth_month_parent"
+              class="form-select"
+              required
+            >
+              <option value="">Mes</option>
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+          </div>
+          <div class="col-md-4 mt-0">
+            <select
+              name="birth_year_parent"
+              id="birth_year_parent"
+              class="form-select"
+              required
+            >
+              <option value="">Año</option>
+            </select>
+          </div>
+        </div>
 
         <label for="parent_curp">CURP</label>
         <input
@@ -530,14 +653,6 @@
           name="parent_curp"
           id="parent_curp"
           class="uppercase-input"
-          required
-        />
-
-        <label for="parent_curp_file">Archivo CURP</label>
-        <input
-          type="file"
-          name="parent_curp_file"
-          id="parent_curp_file"
           required
         />
 
@@ -552,70 +667,99 @@
         <label for="parent_email">Correo Electrónico</label>
         <input type="email" name="parent_email" id="parent_email" required />
 
-        <label for="parent_phone_home">Tel. de Casa/Oficina</label>
-        <input
-          type="tel"
-          name="parent_phone_home"
-          id="parent_phone_home"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label for="parent_phone_home">Tel. de Casa/Oficina</label>
+            <input type="tel" name="parent_phone_home" id="parent_phone_home" />
+          </div>
+          <div class="col-md-6">
+            <label for="parent_phone_mobile">Celular</label>
+            <input
+              type="tel"
+              name="parent_phone_mobile"
+              id="parent_phone_mobile"
+              required
+            />
+          </div>
+        </div>
 
-        <label for="parent_phone_mobile">Celular</label>
-        <input
-          type="tel"
-          name="parent_phone_mobile"
-          id="parent_phone_mobile"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label for="parent_occupation">Ocupación</label>
+            <input
+              type="text"
+              name="parent_occupation"
+              id="parent_occupation"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="parent_marital_status">Estado Civil</label>
+            <select
+              name="parent_marital_status"
+              id="parent_marital_status"
+              required
+            >
+              <option value="">Seleccione</option>
+              <option value="soltero">Soltero</option>
+              <option value="casado">Casado</option>
+              <option value="divorciado">Divorciado</option>
+            </select>
+          </div>
+        </div>
 
         <h3>Dirección</h3>
         <label for="address_street">Calle</label>
         <input type="text" name="address_street" id="address_street" required />
 
-        <label for="address_number">Número</label>
-        <input type="text" name="address_number" id="address_number" required />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label for="address_number">Número</label>
+            <input
+              type="text"
+              name="address_number"
+              id="address_number"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="address_colony">Colonia</label>
+            <input
+              type="text"
+              name="address_colony"
+              id="address_colony"
+              required
+            />
+          </div>
 
-        <label for="address_colony">Colonia</label>
-        <input type="text" name="address_colony" id="address_colony" required />
+          <div class="col-md-4">
+            <label for="address_zipcode">Código Postal</label>
+            <input
+              type="text"
+              name="address_zipcode"
+              id="address_zipcode"
+              required
+            />
+          </div>
+        </div>
 
-        <label for="address_zipcode">Código Postal</label>
-        <input
-          type="text"
-          name="address_zipcode"
-          id="address_zipcode"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label for="address_state">Estado</label>
+            <select name="address_state" id="address_state" required>
+              <option value="seleccione">Seleccione</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="address_city">Ciudad</label>
+            <select name="address_city" id="address_city" required>
+              <option value="seleccione">Seleccione</option>
+              <!-- Agrega más ciudades según sea necesario -->
+            </select>
+          </div>
+        </div>
 
-        <label for="address_state">Estado</label>
-        <select name="address_state" id="address_state" required>
-          <option value="seleccione">Seleccione</option>
-        </select>
-
-        <label for="address_city">Ciudad</label>
-        <select name="address_city" id="address_city" required>
-          <option value="seleccione">Seleccione</option>
-          <!-- Agrega más ciudades según sea necesario -->
-        </select>
-
-        <label for="parent_occupation">Ocupación</label>
-        <input
-          type="text"
-          name="parent_occupation"
-          id="parent_occupation"
-          required
-        />
-
-        <label for="parent_marital_status">Estado Civil</label>
-        <select
-          name="parent_marital_status"
-          id="parent_marital_status"
-          required
-        >
-          <option value="Seleccione">Seleccione</option>
-          <option value="soltero">Soltero</option>
-          <option value="casado">Casado</option>
-          <option value="divorciado">Divorciado</option>
-        </select>
         <!-- Contenedor de botones -->
         <div class="button-container">
           <button class="prev">Atrás</button>
@@ -626,51 +770,66 @@
       <!-- Paso 4: Contacto de Emergencia -->
       <div class="form-page">
         <h2>Contacto de Emergencia</h2>
-        <label for="emergency_firstname">Nombre(s)</label>
-        <input
-          type="text"
-          name="emergency_firstname"
-          id="emergency_firstname"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label for="emergency_firstname">Nombre(s)</label>
+            <input
+              type="text"
+              name="emergency_firstname"
+              id="emergency_firstname"
+              required
+            />
+          </div>
 
-        <label for="emergency_lastname_father">Apellido Paterno</label>
-        <input
-          type="text"
-          name="emergency_lastname_father"
-          id="emergency_lastname_father"
-          required
-        />
+          <div class="col-md-4">
+            <label for="emergency_lastname_father">Apellido Paterno</label>
+            <input
+              type="text"
+              name="emergency_lastname_father"
+              id="emergency_lastname_father"
+              required
+            />
+          </div>
 
-        <label for="emergency_lastname_mother">Apellido Materno</label>
-        <input
-          type="text"
-          name="emergency_lastname_mother"
-          id="emergency_lastname_mother"
-          required
-        />
+          <div class="col-md-4">
+            <label for="emergency_lastname_mother">Apellido Materno</label>
+            <input
+              type="text"
+              name="emergency_lastname_mother"
+              id="emergency_lastname_mother"
+            />
+          </div>
+        </div>
 
-        <label for="emergency_phone">Teléfono de Emergencia</label>
-        <input
-          type="tel"
-          name="emergency_phone"
-          id="emergency_phone"
-          required
-        />
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label for="emergency_phone">Teléfono de Emergencia</label>
+            <input
+              type="tel"
+              name="emergency_phone"
+              id="emergency_phone"
+              required
+            />
+          </div>
 
-        <label for="emergency_relationship">Parentesco</label>
-        <select
-          name="emergency_relationship"
-          id="emergency_relationship"
-          required
-        >
-          <option value="Seleccione">Seleccione</option>
-          <option value="padre">Padre</option>
-          <option value="madre">Madre</option>
-          <option value="hermano">Hermano</option>
-          <option value="tutor">Tutor</option>
-          <option value="otro">Otro</option>
-        </select>
+          <div class="col-md-6">
+            <label for="emergency_relationship">Parentesco</label>
+            <select
+              name="emergency_relationship"
+              id="emergency_relationship"
+              required
+            >
+              <option value="">Seleccione</option>
+              <option value="padre">Padre</option>
+              <option value="madre">Madre</option>
+              <option value="hermano">Hermano</option>
+              <option value="tío">Tío</option>
+              <option value="tutor">Tutor</option>
+              <option value="amigo">Amigo</option>
+            </select>
+          </div>
+        </div>
+
         <!-- Contenedor de botones -->
         <div class="button-container">
           <button class="prev">Atrás</button>
@@ -880,55 +1039,80 @@
             });
 
             const receiptContent = `
-    <div style="font-family: Arial, sans-serif;
-      margin: auto;
-      padding: 20px;
-      background-color: #fff;">
-      <!-- Logo -->
-      <div style="text-align: center; margin-bottom: 20px;">
-        <img src="data:image/webp;base64,${base64Image}" alt="Logo" style="max-height: 80px;">
+    <div class="container py-4">
+      <div class="card shadow-sm mx-auto" style="max-width: 768px;">
+        <div class="card-body p-4">
+          <!-- Logo -->
+          <div class="text-center mb-4">
+            <img src="data:image/webp;base64,${base64Image}" alt="Logo" class="img-fluid" style="max-height: 80px;">
+          </div>
+      
+          <!-- Encabezado -->
+          <h2 class="text-center mb-4 fw-bold">Recibo de Pago</h2>
+          <hr class="my-4">
+      
+          <!-- Información del pago -->
+          <div class="table-responsive">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td class="text-muted fw-medium" style="width: 40%;">
+                    <strong>ID de Pago:</strong>
+                  </td>
+                  <td class="text-end text-break">
+                    ${data.id}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-muted fw-medium">
+                    <strong>Monto:</strong>
+                  </td>
+                  <td class="text-end">
+                    $2000.00 MXN
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-muted fw-medium">
+                    <strong>Método de Pago:</strong>
+                  </td>
+                  <td class="text-end">
+                    Tarjeta
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-muted fw-medium">
+                    <strong>Concepto:</strong>
+                  </td>
+                  <td class="text-end text-break">
+                    Inscripción al Ciclo Escolar 2025-2026
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-muted fw-medium">
+                    <strong>Fecha y Hora:</strong>
+                  </td>
+                  <td class="text-end">
+                    ${moment().format("DD/MM/YYYY, HH:mm:ss")}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-muted fw-medium">
+                    <strong>Nombre del Pagador:</strong>
+                  </td>
+                  <td class="text-end text-break">
+                    ${name} ${primerApellido} ${segundoApellido}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      
+          <!-- Nota -->
+          <p class="text-center text-muted small mt-4 mb-0">
+            Gracias por tu pago. Si tienes preguntas, no dudes en contactarnos.
+          </p>
+        </div>
       </div>
-  
-      <!-- Encabezado -->
-      <h2 style="text-align: center; color: #333;">Recibo de Pago</h2>
-      <hr style="margin: 20px 0; border: 1px solid #ddd;">
-  
-      <!-- Información del pago -->
-      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-        <tr>
-          <td style="padding: 8px; color: #555;"><strong>ID de Pago:</strong></td>
-          <td style="padding: 8px; text-align: right; color: #333;">${
-            data.id
-          }</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; color: #555;"><strong>Monto:</strong></td>
-          <td style="padding: 8px; text-align: right; color: #333;">$2000.00 MXN</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; color: #555;"><strong>Método de Pago:</strong></td>
-          <td style="padding: 8px; text-align: right; color: #333;">Tarjeta</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; color: #555;"><strong>Concepto:</strong></td>
-          <td style="padding: 8px; text-align: right; color: #333;">Inscripción al Ciclo Escolar 2025-2026</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; color: #555;"><strong>Fecha y Hora:</strong></td>
-          <td style="padding: 8px; text-align: right; color: #333;">${moment().format(
-            "DD/MM/YYYY, HH:mm:ss"
-          )}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; color: #555;"><strong>Nombre del Pagador:</strong></td>
-          <td style="padding: 8px; text-align: right; color: #333;">${name} ${primerApellido} ${segundoApellido}</td>
-        </tr>
-      </table>
-  
-      <!-- Nota -->
-      <p style="text-align: center; font-size: 14px; color: #666;">
-        Gracias por tu pago. Si tienes preguntas, no dudes en contactarnos.
-      </p>
     </div>
   `;
 
@@ -975,8 +1159,10 @@
 
             // Enviar los datos del formulario a Firebase
             try {
-              const fechaNacimiento =
-                document.getElementById("parent_birthdate").value;
+              const dia = document.getElementById("birth_day_parent").value;
+              const mes = document.getElementById("birth_month_parent").value;
+              const año = document.getElementById("birth_year_parent").value;
+              const fechaNacimiento = `${año}-${mes}-${dia}`;
               const timestamp = moment(fechaNacimiento, "YYYY-MM-DD").valueOf();
               const calle = document.getElementById("address_street").value;
               const numero = document.getElementById("address_number").value;
@@ -984,8 +1170,6 @@
               const cp = document.getElementById("address_zipcode").value;
               const estado = document.getElementById("address_state").value;
               const ciudad = document.getElementById("address_city").value;
-              const curpFilePadre =
-                document.getElementById("parent_curp_file").files[0];
               const inePadre =
                 document.getElementById("parent_ine_file").files[0];
 
@@ -1044,7 +1228,6 @@
                     name + " " + primerApellido + " " + segundoApellido;
 
                   const fileUploads = [
-                    { file: curpFilePadre, type: "curp", field: "curpFile" },
                     { file: inePadre, type: "ine", field: "ine" },
                   ].map((upload) =>
                     upload.file
@@ -1135,7 +1318,6 @@
                           .get()
                           .then((doc) => {
                             if (doc.exists) {
-                              console.log(doc.data());
                               var recompensa = doc.data().recompensa
                                 ? doc.data().recompensa
                                 : 0;
@@ -1263,8 +1445,10 @@
 
       async function uploadAlumno(idPadre, idPago) {
         try {
-          const fechaNacimiento =
-            document.getElementById("student_birthdate").value;
+          const dia = document.getElementById("birth_day").value;
+          const mes = document.getElementById("birth_month").value;
+          const año = document.getElementById("birth_year").value;
+          const fechaNacimiento = `${año}-${mes}-${dia}`;
           const timestamp = moment(fechaNacimiento, "YYYY-MM-DD").valueOf();
 
           const docRef = await db.collection("inscripciones").add({
@@ -1334,14 +1518,27 @@
         inputs.forEach((input) => {
           if (input.required && !input.value.trim()) {
             isValid = false;
+            input.style.borderColor = "#A60311";
             input.classList.add("error");
+          } else if (input.type === "email" && input.value.trim()) {
+            // Validar correo electrónico
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(input.value.trim())) {
+              isValid = false;
+              input.style.borderColor = "red";
+              input.classList.add("error");
+            } else {
+              input.style.borderColor = "#ccc";
+              input.classList.remove("error");
+            }
           } else {
+            input.style.borderColor = "#ccc";
             input.classList.remove("error");
           }
         });
 
         if (!isValid) {
-          alert("Por favor, completa todos los campos.");
+          alert("Por favor, completa todos los campos correctamente.");
         }
 
         return isValid;
@@ -1361,6 +1558,9 @@
             currentPage++;
             if (currentPage < pages.length) {
               showPage(currentPage);
+              // Desplazar al inicio de la página
+              const container = document.querySelector(".form-container");
+              container.scrollTo({ top: 0, behavior: "smooth" });
             }
           }
         });
@@ -1372,6 +1572,9 @@
           if (currentPage > 0) {
             currentPage--;
             showPage(currentPage);
+            // Desplazar al inicio de la página
+            const container = document.querySelector(".form-container");
+            container.scrollTo({ top: 0, behavior: "smooth" });
           }
         });
       });
@@ -3924,6 +4127,174 @@
             });
           }
         });
+
+        // Generar días
+        const daySelect = document.getElementById("birth_day");
+        for (let i = 1; i <= 31; i++) {
+          const option = document.createElement("option");
+          option.value = String(i).padStart(2, "0");
+          option.textContent = String(i).padStart(2, "0");
+          daySelect.appendChild(option);
+        }
+
+        const daySelectParent = document.getElementById("birth_day_parent");
+        for (let i = 1; i <= 31; i++) {
+          const option = document.createElement("option");
+          option.value = String(i).padStart(2, "0");
+          option.textContent = String(i).padStart(2, "0");
+          daySelectParent.appendChild(option);
+        }
+
+        // Generar años
+        const yearSelect = document.getElementById("birth_year");
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= currentYear - 83; year--) {
+          const option = document.createElement("option");
+          option.value = year;
+          option.textContent = year;
+          yearSelect.appendChild(option);
+        }
+
+        const yearSelectParent = document.getElementById("birth_year_parent");
+        for (let year = currentYear; year >= currentYear - 83; year--) {
+          const option = document.createElement("option");
+          option.value = year;
+          option.textContent = year;
+          yearSelectParent.appendChild(option);
+        }
+
+        // Obtener elementos del DOM
+        const genderSelect = document.getElementById("student_gender");
+        const otherGenderContainer = document.getElementById(
+          "otherGenderContainer"
+        );
+        const otherGenderInput = document.getElementById("other_gender");
+
+        // Agregar evento change al select
+        genderSelect.addEventListener("change", function () {
+          if (this.value === "otro") {
+            otherGenderContainer.style.display = "block";
+            otherGenderInput.required = true;
+          } else {
+            otherGenderContainer.style.display = "none";
+            otherGenderInput.required = false;
+            otherGenderInput.value = ""; // Limpiar el input cuando se selecciona otra opción
+          }
+        });
+
+        // Configuración de grados por nivel escolar
+        const gradosPorNivel = {
+          preescolar: [1, 2, 3],
+          primaria: [1, 2, 3, 4, 5, 6],
+          secundaria: [1, 2, 3],
+          preparatoria: [1, 2, 3],
+        };
+
+        // Obtener referencias a los elementos
+        const nivelSelect = document.getElementById("academic_level");
+        const gradoSelect = document.getElementById("academic_grade");
+
+        // Función para actualizar los grados
+        function actualizarGrados() {
+          // Obtener el nivel seleccionado
+          const nivelSeleccionado = nivelSelect.value;
+
+          // Limpiar el select de grados
+          gradoSelect.innerHTML =
+            '<option value="seleccione">Seleccione</option>';
+
+          // Si se seleccionó un nivel válido
+          if (
+            nivelSeleccionado !== "seleccione" &&
+            gradosPorNivel[nivelSeleccionado]
+          ) {
+            // Agregar las opciones correspondientes al nivel
+            gradosPorNivel[nivelSeleccionado].forEach((grado) => {
+              const option = document.createElement("option");
+              option.value = grado;
+              option.textContent = grado;
+              gradoSelect.appendChild(option);
+            });
+
+            // Habilitar el select de grados
+            gradoSelect.disabled = false;
+          } else {
+            // Deshabilitar el select de grados si no hay nivel seleccionado
+            gradoSelect.disabled = true;
+          }
+        }
+
+        // Agregar el evento change al select de nivel
+        nivelSelect.addEventListener("change", actualizarGrados);
+
+        // Inicializar el estado del select de grados
+        gradoSelect.disabled = true;
+
+        // Obtener el elemento del correo
+        const emailInput = document.getElementById("parent_email");
+
+        // Expresión regular para validar el formato del correo
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        // Función para validar el correo
+        function validateEmail() {
+          const email = emailInput.value.trim();
+
+          // Validar si está vacío (ya que es requerido)
+          if (!email) {
+            markEmailError("El correo es requerido");
+            return false;
+          }
+
+          // Validar el formato usando regex
+          if (!emailRegex.test(email)) {
+            markEmailError("Por favor, ingrese un correo válido");
+            return false;
+          }
+
+          // Si pasa las validaciones, quitar errores
+          clearEmailError();
+          return true;
+        }
+
+        // Función para marcar error
+        function markEmailError(message) {
+          emailInput.style.borderColor = "red";
+          emailInput.style.borderWidth = "2px";
+
+          // Crear o actualizar mensaje de error
+          let errorDiv = emailInput.nextElementSibling;
+          if (!errorDiv || !errorDiv.classList.contains("email-error")) {
+            errorDiv = document.createElement("div");
+            errorDiv.className = "email-error";
+            emailInput.parentNode.insertBefore(
+              errorDiv,
+              emailInput.nextSibling
+            );
+          }
+          errorDiv.textContent = message;
+          errorDiv.style.color = "#A60311";
+          errorDiv.style.fontSize = "12px";
+          errorDiv.style.marginTop = "5px";
+        }
+
+        // Función para limpiar error
+        function clearEmailError() {
+          emailInput.style.borderColor = "";
+          emailInput.style.borderWidth = "";
+
+          // Remover mensaje de error si existe
+          const errorDiv = emailInput.nextElementSibling;
+          if (errorDiv && errorDiv.classList.contains("email-error")) {
+            errorDiv.remove();
+          }
+        }
+
+        // Validar en tiempo real mientras el usuario escribe
+        emailInput.addEventListener("input", validateEmail);
+
+        // Validar cuando el campo pierde el foco
+        emailInput.addEventListener("blur", validateEmail);
       });
     </script>
   </body>
